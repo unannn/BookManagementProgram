@@ -8,6 +8,12 @@ namespace BookManagementProgram
 {
     class CustomerManagement
     {
+        public List<CustomerInformation> ResisterCustomer(List<CustomerInformation> customerList)
+        {
+            //
+
+            return customerList;
+        }
         public string ModifyAdress(string adress)
         {
             string ModifiedAdress = null;
@@ -23,10 +29,10 @@ namespace BookManagementProgram
             return ModifiedPhoneNumber;
         }
 
-        public List<CustomerInformation> DeleteCustomerData(List<CustomerInformation> custmerinformation)
+        public List<CustomerInformation> DeleteCustomerData(List<CustomerInformation> custmerList)
         {
 
-            return custmerinformation;
+            return custmerList;
         }
 
         public List<CustomerInformation> SerchCustomer(List<CustomerInformation> customer,string serchString)
@@ -35,7 +41,7 @@ namespace BookManagementProgram
 
             return  serchedCustomers;
         }
-        public void PrintAllCustomer(List<CustomerInformation> customers)
+        public void PrintAllCustomer(List<CustomerInformation> customerList)
         {
 
         }

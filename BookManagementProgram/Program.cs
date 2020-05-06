@@ -10,6 +10,8 @@ namespace BookManagementProgram
     {
         static void Main(string[] args)
         {
+            BookManagementProgram bookManagementProgram = new BookManagementProgram();
+            bookManagementProgram.StartProgram();
         }
     }
 }
