@@ -8,7 +8,7 @@ namespace BookManagementProgram
 {
     static class ExceptionHandling
     {
-        static public int InputNumber(uint  start, uint end, string numberInString)
+        static public int InputNumber(int  start, int end, string numberInString)   //start 와 end 사이에 문자열이 입력되면 정수로 변환 후 반환 실패시 -1 반환
         {
             int number;
 
@@ -22,9 +22,7 @@ namespace BookManagementProgram
                 }                
             }
 
-            Console.WriteLine("다시 입력해 주세요.");
-            return -1;
+            return InputNumberRange.wrongInput;
         }
-
     }
 }

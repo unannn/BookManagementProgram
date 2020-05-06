@@ -12,24 +12,16 @@ namespace BookManagementProgram
         {
             List<BookInformation> bookList = new List<BookInformation>();
             List<CustomerInformation> customerList = new List<CustomerInformation>();
+            UI ui = new UI();
 
-            int Number = -1;
-            string NumberStr;
+            if (ui.LogInOrCreateAccount() == 1) ui.LoginCustomer(customerList);
+            
 
-            NumberStr = Console.ReadLine();
-
-            if(!string.IsNullOrEmpty(NumberStr) && NumberStr.Length == 1)
+            while (true)
             {
-                if(string.Compare(NumberStr,"1") >= 0 && string.Compare(NumberStr, "9") <= 0)
-                {
-                    Number = int.Parse(NumberStr);
-                    Console.WriteLine(Number);
-                }
             }
-            else
-            {
-                Console.WriteLine("NULL 입력");
-            }
+
+            
         }
     }
 }
