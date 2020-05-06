@@ -64,7 +64,8 @@ namespace BookManagementProgram
 
 
                 InputIdAndPassword(ref id, ref password, inputInspection);
-                
+
+                if (id == null && password == null) return null;
 
                 foreach(CustomerInformation customer in customerList)
                 {

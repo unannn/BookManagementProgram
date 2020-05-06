@@ -12,8 +12,11 @@ namespace BookManagementProgram
         {
             Console.Title = "BookManagementProgram";
 
-            List<BookInformation> bookList = new List<BookInformation>();
+            List<BookInformation> bookList = new List<BookInformation>() {
+                new BookInformation() //생성자 만들고 로그인 해보기
+            };
             List<CustomerInformation> customerList = new List<CustomerInformation>();
+            CustomerInformation logInCustomer;
             UI ui = new UI();
             int seletedNumber = ExceptionHandling.wrongInput;
             
@@ -21,20 +24,15 @@ namespace BookManagementProgram
             while (true)
             {
                 seletedNumber = ui.LogInOrCreateAccount();
-                switch (seletedNumber)
-                {
-                    case User.logIn:
-                        ui.LoginCustomer(customerList);
-                        break;
-                    case User.createAccount:
-                        customerList.Add(ui.CreateCustomerAccount(customerList));
-                        break;
-                    default:
-                        break;
-                }
+               
                 if (seletedNumber == User.logIn)
                 {
-                    ui.LoginCustomer(customerList);
+                    logInCustomer = ui.LoginCustomer(customerList);
+                    if (logInCustomer == null) continue;
+                }
+                else if(seletedNumber == User.createAccount)
+                {
+                    customerList.Add(ui.CreateCustomerAccount(customerList));
                 }
             }
 

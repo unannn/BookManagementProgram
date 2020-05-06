@@ -10,6 +10,7 @@ namespace BookManagementProgram
     static class ExceptionHandling
     {
         public const int wrongInput = -1;
+        //public const string wrongInputString = null;
 
         static public int InputNumber(int  start, int end, string numberInString)   //start 와 end 사이에 문자열이 입력되면 정수로 변환 후 반환 실패시 -1 반환
         {
@@ -26,6 +27,25 @@ namespace BookManagementProgram
             }
 
             return wrongInput;
+        }
+
+        static public string InputYesOrNo(string yesOrNo)   //문자열이 y 인지 n인지 아님 다른값이 들어왔는지 판단 후 반환
+        {
+
+            if (!string.IsNullOrEmpty(yesOrNo) && yesOrNo.Length == 1)
+            {
+                if (string.Compare(yesOrNo, "y") == 0)
+                {
+                    return yesOrNo;
+                }
+                else if(string.Compare(yesOrNo,"n") == 0)
+                {
+                    return yesOrNo;
+                }
+
+            }
+
+            return null;
         }
     }
 }
