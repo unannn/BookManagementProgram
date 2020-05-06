@@ -10,15 +10,32 @@ namespace BookManagementProgram
     {
         public void StartProgram()
         {
+            Console.Title = "BookManagementProgram";
+
             List<BookInformation> bookList = new List<BookInformation>();
             List<CustomerInformation> customerList = new List<CustomerInformation>();
             UI ui = new UI();
-
-            if (ui.LogInOrCreateAccount() == 1) ui.LoginCustomer(customerList);
+            int seletedNumber = ExceptionHandling.wrongInput;
             
 
             while (true)
             {
+                seletedNumber = ui.LogInOrCreateAccount();
+                switch (seletedNumber)
+                {
+                    case User.logIn:
+                        ui.LoginCustomer(customerList);
+                        break;
+                    case User.createAccount:
+                        customerList.Add(ui.CreateCustomerAccount(customerList));
+                        break;
+                    default:
+                        break;
+                }
+                if (seletedNumber == User.logIn)
+                {
+                    ui.LoginCustomer(customerList);
+                }
             }
 
             

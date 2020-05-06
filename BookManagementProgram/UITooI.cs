@@ -29,9 +29,60 @@ namespace BookManagementProgram
             id = Console.ReadLine();
 
             Console.SetCursorPosition(Console.CursorLeft + 2, Console.CursorTop + 2);
+            password = Console.ReadLine();                       
+        }
+
+        protected CustomerInformation InputCustomerAccountInformation(int passwordCheck,int duplicateId)
+        {
+            CustomerInformation newCustomer = new CustomerInformation();
+            string id = null;
+            string password = null, passwordConfirmation = null;
+            string name = null;
+            string phoneNumber = null;
+            string adress = null;
+            
+            PrintInputBox("아이디");
+            PrintInputBox("비밀번호");
+            PrintInputBox("비밀번호확인");
+            PrintInputBox("이름");
+            PrintInputBox("휴대폰번호");
+            PrintInputBox("주소");
+
+            if (passwordCheck == ExceptionHandling.wrongInput) Console.WriteLine("비밀번호를 확인해 주세요");
+
+            if (duplicateId == ExceptionHandling.wrongInput) Console.WriteLine("중복된 아이디가 있습니다");
+
+
+            Console.SetCursorPosition(Console.CursorLeft + 2, Console.CursorTop - 17 + passwordCheck + duplicateId);
+            id = Console.ReadLine();
+
+            Console.SetCursorPosition(Console.CursorLeft + 2, Console.CursorTop + 2);
             password = Console.ReadLine();
 
-                       
+            Console.SetCursorPosition(Console.CursorLeft + 2, Console.CursorTop + 2);
+            passwordConfirmation = Console.ReadLine();
+
+            Console.SetCursorPosition(Console.CursorLeft + 2, Console.CursorTop + 2);
+            name = Console.ReadLine();
+
+            Console.SetCursorPosition(Console.CursorLeft + 2, Console.CursorTop + 2);
+            phoneNumber = Console.ReadLine();
+
+            Console.SetCursorPosition(Console.CursorLeft + 2, Console.CursorTop + 2);
+            adress = Console.ReadLine();
+
+            if(string.Compare(password,passwordConfirmation) == 0)
+            {
+                return null;
+            }
+
+            newCustomer.Id = id;
+            newCustomer.Password = password;
+            newCustomer.Name = name;
+            newCustomer.PhoneNumber = phoneNumber;
+            newCustomer.Adress = adress;
+
+            return newCustomer;
         }
 
         protected List<CustomerInformation> CreateID(List<CustomerInformation> customerList)

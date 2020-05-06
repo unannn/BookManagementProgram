@@ -12,6 +12,12 @@ namespace BookManagementProgram
         public const int inputLocationX = 28;
         public const int inputLocationY = 5;
     }
+    class User
+    {
+        public const int logIn = 1;
+        public const int createAccount = 2;
+
+    }
 
     class UI : UITooI
     {
@@ -64,7 +70,7 @@ namespace BookManagementProgram
                 {
                     if(customer.Id == id && customer.Password == password)
                     {
-                        loginCustomer = customer;
+                        loginCustomer = (CustomerInformation)customer.Clone();  //깊은복사
                     }
                 }
 
@@ -73,6 +79,46 @@ namespace BookManagementProgram
             }
             
             return loginCustomer;
+        }
+
+        public CustomerInformation CreateCustomerAccount(List<CustomerInformation> customerList)
+        {
+            CustomerInformation customerToBeAdded = null;
+            bool sameId = true;
+            int customerNumber;
+            int passwordCheck = 0,duplicateId = 0;
+
+            while (sameId)
+            {
+                PrintTitle();
+
+                customerToBeAdded = InputCustomerAccountInformation(passwordCheck,duplicateId);
+
+
+                if(customerToBeAdded != null)
+                {                   
+                    for(customerNumber  = 0; customerNumber < customerList.Count; customerNumber++)
+                    {
+                        if(string.Compare(customerToBeAdded.Id,customerList[customerNumber].Id) == 0)
+                        {
+                            duplicateId = ExceptionHandling.wrongInput;
+                            break;
+                        }
+                    }
+
+                    if(customerNumber == customerList.Count) // 위 반복문을 모두 수행했는데 break가 안됐으면
+                    {
+                        sameId = false;
+                    }
+                }
+                else
+                {
+                    passwordCheck = ExceptionHandling.wrongInput;
+                }
+                Console.Clear();
+            }
+
+            return customerToBeAdded;
         }
           
         public int PrintUGeneralUserMenu()

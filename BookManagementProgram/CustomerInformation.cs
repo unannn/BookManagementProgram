@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BookManagementProgram
 {
-    class CustomerInformation
+    class CustomerInformation :ICloneable
     {
         private string id;
         private string password;
@@ -42,6 +42,19 @@ namespace BookManagementProgram
         {
             get { return adress; }
             set { adress = value; }
+        }
+
+        public object Clone()
+        {
+            CustomerInformation customer = new CustomerInformation();
+
+            customer.id = this.id;
+            customer.password = this.password;
+            customer.name = this.name;
+            customer.phoneNumber = this.phoneNumber;
+            customer.adress = this.adress;
+
+            return customer;
         }
 
         //게터세터, 생성자       
