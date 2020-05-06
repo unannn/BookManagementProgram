@@ -14,6 +14,36 @@ namespace BookManagementProgram
         private string phoneNumber;
         private string adress;
 
+        public string Id
+        {
+            get { return id; }
+            set { id = value; }
+        }
+
+        public string Password
+        {
+            get { return password; }
+            set { password = value; }
+        }
+
+        public string Name
+        {
+            get { return name; }
+            set { name = value; }
+        }
+
+        public string PhoneNumber
+        {
+            get { return phoneNumber; }
+            set { phoneNumber = value; }
+        }
+
+        public string Adress
+        {
+            get { return adress; }
+            set { adress = value; }
+        }
+
         //게터세터, 생성자       
     }
     

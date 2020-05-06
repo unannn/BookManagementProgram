@@ -11,8 +11,6 @@ namespace BookManagementProgram
         public const int startNumber = 1;
         public const int inputLocationX = 28;
         public const int inputLocationY = 5;
-        public const int wrongInput = -1;
-
     }
 
     class UI : UITooI
@@ -34,7 +32,7 @@ namespace BookManagementProgram
 
 
                 Console.Write("로그인 1, 회원가입 2 입력 : ");
-                if(inputNumber == InputNumberRange.wrongInput)Console.Write("\n다시 입력해 주세요.");
+                if(inputNumber == ExceptionHandling.wrongInput)Console.Write("\n다시 입력해 주세요.");
 
                 Console.SetCursorPosition(InputNumberRange.inputLocationX, InputNumberRange.inputLocationY);
                 inputNumberInString = Console.ReadLine();
@@ -49,15 +47,32 @@ namespace BookManagementProgram
         
         public CustomerInformation LoginCustomer(List<CustomerInformation> customerList)
         {
-            int index = 0;
             string id = null;
             string password = null;
+            CustomerInformation loginCustomer = null;
+            int inputInspection = 0;
 
-            PrintTitle();
+            while (loginCustomer == null)
+            {
+                PrintTitle();
 
-            InputIdAndPassword(ref id,ref password);
 
-            return customerList[index];
+                InputIdAndPassword(ref id, ref password, inputInspection);
+                
+
+                foreach(CustomerInformation customer in customerList)
+                {
+                    if(customer.Id == id && customer.Password == password)
+                    {
+                        loginCustomer = customer;
+                    }
+                }
+
+                inputInspection = -1;
+                Console.Clear();
+            }
+            
+            return loginCustomer;
         }
           
         public int PrintUGeneralUserMenu()
