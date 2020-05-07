@@ -8,10 +8,10 @@ namespace BookManagementProgram
 {
     class BookInformation:ICloneable
     {
-        private string name;
-        private string author;
-        private string publisher;
-        private int quantity;
+        private string name;        //책이름 최대30자
+        private string author;      //작가이름 최대20자 
+        private string publisher;   //출판사 최대10자
+        private int quantity;       //최대 9권
 
         public string Name
         {

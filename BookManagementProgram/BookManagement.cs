@@ -6,12 +6,29 @@ using System.Threading.Tasks;
 
 namespace BookManagementProgram
 {
-    class BookManagement
+    class BookManagement:UITooI
     {
-        public List<BookInformation> ResisterBook(List<BookInformation> bookList)
+        
+        public void PrintBookList(List<BookInformation> bookList)
         {
-            //
-            return bookList;
+            string divisionLine = new String('-', 50);
+            //string blank = null;
+            
+            for(int order = 0;order < bookList.Count; order++)
+            {
+                Console.WriteLine(divisionLine);
+
+                OneSpace((order+1).ToString(), 3);
+                OneSpace(bookList[order].Name, 20);
+                OneSpace(bookList[order].Author, 10);
+                OneSpace(bookList[order].Publisher, 10);
+
+
+                Console.Write(" " + bookList[order].Quantity + "개");
+                Console.WriteLine();
+            }
+
+            Console.WriteLine(divisionLine);            
         }
 
         public BookInformation ModifyBookQuantity(BookInformation book)

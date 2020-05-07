@@ -160,12 +160,13 @@ namespace BookManagementProgram
         public int PrintAdministratorUserMenu()
         {           
             List<string> Menu = new List<string>(){
-               "1. 도서 대여",
-               "2. 회원 정보 수정",
-               "3. 회원 삭제",
-               "4. 도서 등록",
-               "5. 도서 대여",
-               "7. 도서 삭제",
+               "1. 도서 리스트 보기/검색/대여",
+               "2. 도서 반납",
+               "3. 도서 등록",
+               "4. 도서 삭제",
+               "5. 회원 리스트 보기",
+               "6. 회원 삭제",
+               "7. 내 정보 수정",                             
                "8. 로그아웃",
                "9. 프로그램 종료"
             };
@@ -193,10 +194,10 @@ namespace BookManagementProgram
 
         public int PrintUserMenu()
         {
-            List<string> Menu = new List<string>(){
-               "1. 도서 대여",
-               "2. 내 정보 수정",              
-               "3. 도서 대여",              
+            List<string> menu = new List<string>(){
+               "1. 도서 리스트 보기/검색/대여",
+               "2. 도서 반납",
+               "3. 내 정보 수정",                           
                "4. 로그아웃",
                "5. 프로그램 종료"
             };
@@ -207,20 +208,78 @@ namespace BookManagementProgram
             {
                 PrintTitle();
 
-                PrintMenuList(Menu);
+                PrintMenuList(menu);
 
                 Console.Write("1 ~ 5입력 : ");
 
                 inputNumberInString = Console.ReadLine();
-                inputNumber = ExceptionHandling.InputNumber(1, Menu.Count, inputNumberInString);
+                inputNumber = ExceptionHandling.InputNumber(1, menu.Count, inputNumberInString);
 
                 Console.Clear();
             }
                         
             return inputNumber;
         }
-        public void RentBook(CustomerInformation loginCustomer,List<BookInformation> bookList)
+        //public void RentBook(CustomerInformation loginCustomer,List<BookInformation> bookList)
+        //{
+        //    PrintTitle();
+
+
+        //}
+        public void PrintAndSerchAndRentBook(List<BookInformation> bookList,CustomerInformation logInCustomer)
         {
+            BookManagement bookManageMent = new BookManagement();
+            List<string> controlMenu = new List<string>(){
+               "1. 도서이름 검색",
+               "2. 도서저자 검색",
+               "3. 도서 출판사 검색",
+               "4. 도서 대여",
+               "5. 나가기"
+            };
+            int inputNumber = 0;  //inputNumber 초기화
+            string inputNumberInString = null;
+
+            while (true)
+            {
+
+                PrintTitle();
+
+                bookManageMent.PrintBookList(bookList);
+
+                PrintMenuList(controlMenu);
+
+                Console.Write("1~5 정수 입력 : ");
+
+                if (inputNumber == ExceptionHandling.wrongInput)
+                {
+                    Console.Write("\n다시 입력해 주세요");
+                    Console.SetCursorPosition(Console.CursorLeft - 2, Console.CursorTop - 1);
+                }
+
+                inputNumberInString = Console.ReadLine();
+                inputNumber = ExceptionHandling.InputNumber(1, controlMenu.Count, inputNumberInString);
+
+                if(inputNumber == ExceptionHandling.wrongInput)
+                {
+                    Console.Clear();
+                    continue;
+                }
+
+                switch (inputNumber)
+                {
+                    case 1:
+
+                        break;
+                    case 2:
+                        break;
+                    case 3:
+                        break;
+                    default:
+                        break;
+                }
+
+                Console.Clear();
+            }
 
         }
 

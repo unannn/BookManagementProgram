@@ -14,13 +14,13 @@ namespace BookManagementProgram
             Console.SetWindowSize(70,36);
 
             List<BookInformation> bookList = new List<BookInformation>() {
-                new BookInformation("투명 드래곤","이윤환","한빛미디어",5),
-                new BookInformation("어쩌구일찐짱 1","김일진","퍼스트북",2),
-                new BookInformation("어쩌구일찐짱 2","김일진","퍼스트북",2),
+                new BookInformation("투명드래곤","이윤환","한빛미디어",5),
+                new BookInformation("어쩌구일찐짱","김일진","퍼스트북",2),
+                new BookInformation("어쩌구일찐꽝","김일진","퍼스트북",2),
             };
             List<CustomerInformation> customerList = new List<CustomerInformation>()
             {
-                new CustomerInformation("digh7930","16011679","이윤환","01049075608","서울시 도봉구 방학3동 신동아아파트",true) //생성자 만들고 로그인 해보기
+                new CustomerInformation("asdf","asdf","이윤환","01049075608","서울시 도봉구 방학3동 신동아아파트",true) //생성자 만들고 로그인 해보기
             };
             CustomerInformation logInCustomer = null, createdAccount;
             UI ui = new UI();
@@ -62,7 +62,7 @@ namespace BookManagementProgram
                         switch (selectedNumber)
                         {
                             case 1:
-                                ui.RentBook(logInCustomer, bookList);
+                                ui.PrintAndSerchAndRentBook(bookList,logInCustomer);
                                 break;
                             case 2:
                                 break;
@@ -78,7 +78,7 @@ namespace BookManagementProgram
                                 break;
                             case 8:
                                 break;
-                            case 9:
+                            default:
                                 break;
 
                         }

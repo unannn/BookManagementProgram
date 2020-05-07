@@ -83,5 +83,12 @@ namespace BookManagementProgram
                 Console.WriteLine(item + "\n");
             }
         }
+
+        protected void OneSpace(string bookeInformation,int limit)
+        {
+            Console.Write(bookeInformation);
+            Console.Write(new String(' ', limit - bookeInformation.Length * 2));
+            Console.Write("|");
+        }
     }
 }
