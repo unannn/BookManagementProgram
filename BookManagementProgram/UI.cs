@@ -19,7 +19,7 @@ namespace BookManagementProgram
 
     }
 
-    class UI : UITooI
+    class UI : CustomerManagement
     {
 
         public int LogInOrCreateAccount()
@@ -28,8 +28,8 @@ namespace BookManagementProgram
             int inputNumber = -2;
             List<string> initialMenu = new List<string>()
             {
-                "1. 로그인",
-                "2. 회원가입"
+                "로그인 1",
+                "회원가입 2"
             };
 
             while(inputNumber < 0)
@@ -37,7 +37,7 @@ namespace BookManagementProgram
                 PrintTitle();
 
 
-                Console.Write("로그인 1, 회원가입 2 입력 : ");
+                Console.Write($"{initialMenu[0]} {initialMenu[1]} 입력 : ");
                 if(inputNumber == ExceptionHandling.wrongInput)Console.Write("\n다시 입력해 주세요.");
 
                 Console.SetCursorPosition(InputNumberRange.inputLocationX, InputNumberRange.inputLocationY);
@@ -84,38 +84,73 @@ namespace BookManagementProgram
 
         public CustomerInformation CreateCustomerAccount(List<CustomerInformation> customerList)
         {
-            CustomerInformation customerToBeAdded = null;
-            bool sameId = true;
-            int customerNumber;
-            int passwordCheck = 0,duplicateId = 0;
+            CustomerInformation customerToBeAdded = new CustomerInformation();
+            NewAccountException newAccountException = new NewAccountException();
 
-            while (sameId)
+            bool loginSucessful = false;
+
+            while (!loginSucessful)
             {
+                Console.Clear();
+
                 PrintTitle();
+                
+                customerToBeAdded = InputCustomerAccountInformation(newAccountException);
 
-                customerToBeAdded = InputCustomerAccountInformation(passwordCheck,duplicateId);
-
-
-                if(customerToBeAdded != null)
-                {                   
-                    for(customerNumber  = 0; customerNumber < customerList.Count; customerNumber++)
-                    {
-                        if(string.Compare(customerToBeAdded.Id,customerList[customerNumber].Id) == 0)
-                        {
-                            duplicateId = ExceptionHandling.wrongInput;
-                            break;
-                        }
-                    }
-
-                    if(customerNumber == customerList.Count) // 위 반복문을 모두 수행했는데 break가 안됐으면
-                    {
-                        sameId = false;
-                    }
-                }
-                else
+                if (newAccountException.previousOrStay == "stay")
                 {
-                    passwordCheck = ExceptionHandling.wrongInput;
+                    newAccountException.previousOrStay = " ";
+
+                    continue;
                 }
+                else if (newAccountException.previousOrStay == "previous")
+                {
+                    newAccountException.previousOrStay = " ";
+                    Console.Clear();
+                    return null;
+                }
+                
+                foreach(CustomerInformation customer in customerList)
+                {
+                    if (string.Compare(customerToBeAdded.Id, customer.Id) == 0)  //같은 아이디 존재
+                    {
+                        newAccountException.sameId = true;
+                        continue;
+                    }
+                }
+
+                if (customerToBeAdded.Id == null)
+                {
+                    newAccountException.wrongId = true;
+                    continue;
+                }
+
+                if (customerToBeAdded.Password == null)
+                {
+                    newAccountException.wrongPassword = true;
+                    continue;
+                }
+
+                if (customerToBeAdded.Name == null)
+                {
+                    newAccountException.wrongName = true;
+                    continue;
+                }
+
+                if(customerToBeAdded.PhoneNumber == null)
+                {
+                    newAccountException.wrongPhoneNumber = true;
+                    continue;
+                }
+
+                if (customerToBeAdded.Adress == null)
+                {
+                    newAccountException.wrongAdress = true;
+                    continue;
+                }
+
+                loginSucessful = true;
+
                 Console.Clear();
             }
 

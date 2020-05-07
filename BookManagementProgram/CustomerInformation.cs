@@ -43,6 +43,23 @@ namespace BookManagementProgram
             get { return adress; }
             set { adress = value; }
         }
+        public CustomerInformation()
+        {
+            this.id = null;
+            this.password = null;
+            this.name = null;
+            this.phoneNumber = null;
+            this.adress = null;
+        }
+
+        public CustomerInformation(string id, string password, string name, string phoneNumber, string adress)
+        {
+            this.id = id;
+            this.password = password;
+            this.name = name;
+            this.phoneNumber = phoneNumber;
+            this.adress = adress;
+        }
 
         public object Clone()
         {
@@ -56,8 +73,6 @@ namespace BookManagementProgram
 
             return customer;
         }
-
-        //게터세터, 생성자       
     }
     
 }
