@@ -13,7 +13,7 @@ namespace BookManagementProgram
         private string name;
         private string phoneNumber;
         private string adress;
-
+        private bool isAdministrator;
         public string Id
         {
             get { return id; }
@@ -43,6 +43,13 @@ namespace BookManagementProgram
             get { return adress; }
             set { adress = value; }
         }
+
+        public bool IsAdministrator
+        {
+            get { return isAdministrator; }
+            set { isAdministrator = value; }
+        }
+
         public CustomerInformation()
         {
             this.id = null;
@@ -50,15 +57,17 @@ namespace BookManagementProgram
             this.name = null;
             this.phoneNumber = null;
             this.adress = null;
+            this.isAdministrator = false;
         }
 
-        public CustomerInformation(string id, string password, string name, string phoneNumber, string adress)
+        public CustomerInformation(string id, string password, string name, string phoneNumber, string adress,bool isAdministrator)
         {
             this.id = id;
             this.password = password;
             this.name = name;
             this.phoneNumber = phoneNumber;
             this.adress = adress;
+            this.isAdministrator = isAdministrator;
         }
 
         public object Clone()
@@ -70,6 +79,7 @@ namespace BookManagementProgram
             customer.name = this.name;
             customer.phoneNumber = this.phoneNumber;
             customer.adress = this.adress;
+            customer.isAdministrator = this.isAdministrator;
 
             return customer;
         }

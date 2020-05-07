@@ -171,15 +171,68 @@ namespace BookManagementProgram
         }
 
         public int PrintAdministratorUserMenu()
-        {
-           
+        {           
             List<string> Menu = new List<string>(){
                "1. 도서 대여",
                "2. 회원 정보 수정",
-               "3. 도서 정보 수정",
-               "3. 로그아웃"
+               "3. 회원 삭제",
+               "4. 도서 등록",
+               "5. 도서 대여",
+               "7. 도서 삭제",
+               "8. 로그아웃",
+               "9. 프로그램 종료"
             };
-            return 1;
+            int inputNumber = ExceptionHandling.wrongInput;  //inputNumber 초기화
+            string inputNumberInString = null;
+
+            while (inputNumber == ExceptionHandling.wrongInput)
+            {
+                PrintTitle();
+
+                PrintMenuList(Menu);
+
+                Console.Write("1 ~ 9입력 : ");
+
+                inputNumberInString = Console.ReadLine();
+                inputNumber = ExceptionHandling.InputNumber(1, Menu.Count, inputNumberInString);
+
+                Console.Clear();
+            }
+
+           
+
+            return inputNumber;
+        }
+
+        public int PrintUserMenu()
+        {
+            List<string> Menu = new List<string>(){
+               "1. 도서 대여",
+               "2. 내 정보 수정",              
+               "3. 도서 대여",              
+               "4. 로그아웃",
+               "5. 프로그램 종료"
+            };
+            int inputNumber = ExceptionHandling.wrongInput;  //inputNumber 초기화
+            string inputNumberInString = null;
+
+            while (inputNumber == ExceptionHandling.wrongInput)
+            {
+                PrintTitle();
+
+                PrintMenuList(Menu);
+
+                Console.Write("1 ~ 5입력 : ");
+
+                inputNumberInString = Console.ReadLine();
+                inputNumber = ExceptionHandling.InputNumber(1, Menu.Count, inputNumberInString);
+
+                Console.Clear();
+            }
+
+
+
+            return inputNumber;
         }
     }
 }

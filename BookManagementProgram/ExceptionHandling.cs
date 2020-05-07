@@ -138,24 +138,7 @@ namespace BookManagementProgram
                 phoneNumber = null;
             }
 
-            return phoneNumber;   
-            
-            //while(phoneNumber.Length < 11)
-            //{
-            //    input = Console.Read();
-
-            //    if (input >= '0' && input <= '9')
-            //    {
-            //        phoneNumber += Convert.ToChar(input);
-            //    }
-            //    else
-            //    {
-            //        phoneNumber = null;
-            //        break;
-            //    }
-            //}
-
-
+            return phoneNumber;
         }
 
         static public string inputString(int above, int below)

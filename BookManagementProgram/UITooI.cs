@@ -26,7 +26,7 @@ namespace BookManagementProgram
             {
                 Console.WriteLine("가입하지 않은 아이디이거나, 잘못된 비밀번호입니다.");
                 Console.Write("초기화면으로 돌아가시겠습니까?[y,n] ");
-                //yesOrNo = ExceptionHandling.InputYesOrNo(yesOrNo);
+
                 while (true)
                 {
                     yesOrNo = Console.ReadLine();
@@ -62,13 +62,7 @@ namespace BookManagementProgram
             Console.SetCursorPosition(Console.CursorLeft + 2, Console.CursorTop + 2);
             password = Console.ReadLine();                       
         }
-               
-        protected List<CustomerInformation> CreateID(List<CustomerInformation> customerList)
-        {
-
-            return customerList;
-        }
-
+              
         protected void PrintInputBox(string inputData)
         {
             string loginBar = new String('-', 30);
@@ -77,11 +71,17 @@ namespace BookManagementProgram
             Console.WriteLine(loginBar);
             Console.Write("  {0} ", inputData);
             Console.Write(whiteSpace);
-            // Console.WriteLine("|");
             Console.WriteLine();
-
-            //Console.Write(" ");
             Console.WriteLine(loginBar);
+        }
+
+        protected void PrintMenuList(List<string> menuList)
+        {
+            Console.WriteLine();
+            foreach(string item in menuList)
+            {
+                Console.WriteLine(item + "\n");
+            }
         }
     }
 }
