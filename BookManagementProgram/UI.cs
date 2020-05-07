@@ -156,20 +156,7 @@ namespace BookManagementProgram
 
             return customerToBeAdded;
         }
-          
-        public int PrintUGeneralUserMenu()
-        {
-            List<string> Menu = new List<string>(){                 
-               "1. 도서 대여",
-               "2. 회원 정보 수정",
-               "3. 로그아웃"
-            };
-
-            
-
-            return 1;
-        }
-
+              
         public int PrintAdministratorUserMenu()
         {           
             List<string> Menu = new List<string>(){
@@ -229,10 +216,13 @@ namespace BookManagementProgram
 
                 Console.Clear();
             }
-
-
-
+                        
             return inputNumber;
         }
+        public void RentBook(CustomerInformation loginCustomer,List<BookInformation> bookList)
+        {
+
+        }
+
     }
 }

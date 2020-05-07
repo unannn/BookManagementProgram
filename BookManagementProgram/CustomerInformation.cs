@@ -14,6 +14,8 @@ namespace BookManagementProgram
         private string phoneNumber;
         private string adress;
         private bool isAdministrator;
+        private List<BookInformation> rentedBook;
+
         public string Id
         {
             get { return id; }
@@ -58,6 +60,7 @@ namespace BookManagementProgram
             this.phoneNumber = null;
             this.adress = null;
             this.isAdministrator = false;
+            this.rentedBook = new List<BookInformation>();
         }
 
         public CustomerInformation(string id, string password, string name, string phoneNumber, string adress,bool isAdministrator)
@@ -68,6 +71,7 @@ namespace BookManagementProgram
             this.phoneNumber = phoneNumber;
             this.adress = adress;
             this.isAdministrator = isAdministrator;
+            this.rentedBook = new List<BookInformation>();
         }
 
         public object Clone()

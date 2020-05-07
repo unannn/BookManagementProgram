@@ -14,6 +14,9 @@ namespace BookManagementProgram
             Console.SetWindowSize(70,36);
 
             List<BookInformation> bookList = new List<BookInformation>() {
+                new BookInformation("투명 드래곤","이윤환","한빛미디어",5),
+                new BookInformation("어쩌구일찐짱 1","김일진","퍼스트북",2),
+                new BookInformation("어쩌구일찐짱 2","김일진","퍼스트북",2),
             };
             List<CustomerInformation> customerList = new List<CustomerInformation>()
             {
@@ -24,7 +27,7 @@ namespace BookManagementProgram
             int selectedNumber = ExceptionHandling.wrongInput;
             bool loginSucessful = false;
             bool endOfProgram = false;
-
+            
             while (!endOfProgram)
             {
                 while (!loginSucessful)            //로그인 성공 시 까지 반복
@@ -59,6 +62,7 @@ namespace BookManagementProgram
                         switch (selectedNumber)
                         {
                             case 1:
+                                ui.RentBook(logInCustomer, bookList);
                                 break;
                             case 2:
                                 break;
