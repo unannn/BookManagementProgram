@@ -11,7 +11,7 @@ namespace BookManagementProgram
         
         public void PrintBookList(List<BookInformation> bookList)
         {
-            string divisionLine = new String('-', 55);
+            string divisionLine = new String('-', 76);
             //string blank = null;
             
             for(int order = 0;order < bookList.Count; order++)
@@ -19,8 +19,8 @@ namespace BookManagementProgram
                 Console.WriteLine(divisionLine);
 
                 OneSpace((order+1).ToString(), 3);
-                OneSpace(bookList[order].Name, 20);  
-                OneSpace(bookList[order].Author, 10);
+                OneSpace(bookList[order].Name, 30);  
+                OneSpace(bookList[order].Author, 20);
                 OneSpace(bookList[order].Publisher, 10);
 
 
@@ -29,6 +29,26 @@ namespace BookManagementProgram
             }
 
             Console.WriteLine(divisionLine);            
+        }
+
+        public void PrintBookListForReturn(List<BookInformation> bookList)
+        {
+            string divisionLine = new String('-', 72);
+            //string blank = null;
+
+            for (int order = 0; order < bookList.Count; order++)
+            {
+                Console.WriteLine(divisionLine);
+
+                OneSpace((order + 1).ToString(), 3);
+                OneSpace(bookList[order].Name, 30);
+                OneSpace(bookList[order].Author, 20);
+                OneSpace(bookList[order].Publisher, 10);
+                                
+                Console.WriteLine();
+            }
+
+            Console.WriteLine(divisionLine);
         }
 
         public BookInformation ModifyBookQuantity(BookInformation book)

@@ -11,12 +11,15 @@ namespace BookManagementProgram
         public void StartProgram()
         {
             Console.Title = "BookManagementProgram";
-            Console.SetWindowSize(70,36);
+            Console.SetWindowSize(90,36);
 
             List<BookInformation> bookList = new List<BookInformation>() {
-                new BookInformation("투명드래곤","이윤환","한빛미디어",5),
-                new BookInformation("어쩌구일찐짱","김일진","퍼스트북",2),
-                new BookInformation("어쩌구일찐꽝","김일진","퍼스트북",2),
+                new BookInformation("투명 드래곤","이윤환","한빛미디어",5),
+                new BookInformation("어쩌구일찐 짱","김일진","퍼스트북",2),
+                new BookInformation("어쩌구일찐 꽝","김일진","퍼스트북",2),
+                new BookInformation("자고싶다i want to sleep","어쩌구","퍼스트북",2),
+                new BookInformation("123456789","김11","퍼스트북",2),
+
             };
             List<CustomerInformation> customerList = new List<CustomerInformation>()
             {
@@ -65,6 +68,7 @@ namespace BookManagementProgram
                                 ui.PrintAndSerchAndRentBook(bookList,logInCustomer);
                                 break;
                             case 2:
+                                ui.PrintBookReturn(logInCustomer, bookList);
                                 break;
                             case 3:
                                 break;

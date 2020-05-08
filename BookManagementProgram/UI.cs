@@ -332,7 +332,6 @@ namespace BookManagementProgram
 
                 Console.Clear();
             }
-
         }
 
         private void RentBook(CustomerInformation logInCustomer,List<BookInformation> bookList)
@@ -344,8 +343,19 @@ namespace BookManagementProgram
             inputNumberInString = Console.ReadLine();
             inputNumber = ExceptionHandling.InputNumber(1, bookList.Count, inputNumberInString);
 
-            if(inputNumber != ExceptionHandling.wrongInput)
+            if(inputNumber != ExceptionHandling.wrongInput && bookList[inputNumber - 1].Quantity > 0) //올바른 번호가 입력되고 남은 수량이 있으면
             {
+                foreach(BookInformation rentedBook in logInCustomer.RentedBook)
+                {
+                    if(rentedBook == bookList[inputNumber - 1]) //이미 대여중인 책이면
+                    {
+                        Console.WriteLine("이미 대여한 도서입니다.");
+                        Console.WriteLine("Press Any Key...");
+                        Console.ReadKey();
+                        return;
+                    }
+                }
+
                 bookList[inputNumber - 1].Quantity -= 1;
                 logInCustomer.RentedBook.Add(bookList[inputNumber - 1]);
                 Console.WriteLine("대여가 완료되었습니다.");
@@ -357,6 +367,45 @@ namespace BookManagementProgram
                 Console.WriteLine("해당 도서가 존재하지 않습니다.");
                 Console.WriteLine("Press Any Key...");
                 Console.ReadKey();
+            }
+
+        }
+
+        public void PrintBookReturn( CustomerInformation logInCustomer, List<BookInformation> bookList)
+        {
+            BookManagement bookMangement = new BookManagement();
+            string inputNumberInString;
+            int inputNumber;
+            bool isEnd = false;
+
+
+            while (!isEnd)
+            {
+                Console.Clear();
+
+                PrintTitle();
+
+                Console.WriteLine("대여중인 도서 목록\n");
+                bookMangement.PrintBookListForReturn(logInCustomer.RentedBook);
+
+                Console.Write("반납 할 책 번호 입력 : ");
+                inputNumberInString = Console.ReadLine();
+                inputNumber = ExceptionHandling.InputNumber(1,logInCustomer.RentedBook.Count,inputNumberInString);
+                
+               if(inputNumber != ExceptionHandling.wrongInput)
+                {
+                    foreach(BookInformation book in bookList)
+                    {
+                        if (book.Name == logInCustomer.RentedBook[inputNumber - 1].Name) book.Quantity += 1;    //같은 제목의 책을 리스트에찾아 반납
+                    }
+
+                    logInCustomer.RentedBook.RemoveAt(inputNumber - 1);       //대여한 도서 목록에서 삭제
+
+                    Console.WriteLine("반납이 완료 됐습니다.");
+                    Console.WriteLine("Press Any Key...");
+                    Console.ReadKey();
+                    isEnd = true;
+                }               
             }
 
         }
