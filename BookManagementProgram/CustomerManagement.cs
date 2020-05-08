@@ -7,15 +7,9 @@ using System.Threading.Tasks;
 namespace BookManagementProgram
 {
     class CustomerManagement : UITooI
-    {
-        //public List<CustomerInformation> ResisterCustomer(List<CustomerInformation> customerList)
-        //{
-        //    //
+    {       
 
-        //    return customerList;
-        //}
-
-        protected CustomerInformation InputCustomerAccountInformation(NewAccountException newAccountException)
+        protected CustomerInformation InputCustomerAccountInformation(NewAccountException newAccountException)   //등록하고자하는 계정정보 반환
         {
             CustomerInformation newCustomer = new CustomerInformation();
             string id = null;
@@ -192,6 +186,30 @@ namespace BookManagementProgram
         }
         public void PrintAllCustomer(List<CustomerInformation> customerList)
         {
+            string divisionLine = new String('-', 125);
+
+            Console.WriteLine(divisionLine);
+
+            OneSpace(("번호").ToString(), 5);
+            OneSpace("아이디", 23);
+            OneSpace("이름", 23);
+            OneSpace("휴대폰번호", 23);
+            OneSpace("주소", 40);
+            Console.WriteLine();
+
+            for (int order = 0; order < customerList.Count; order++)
+            {
+                Console.WriteLine(divisionLine);
+
+                OneSpace((order + 1).ToString(), 5);
+                OneSpace(customerList[order].Id, 23);
+                OneSpace(customerList[order].Name, 23);
+                OneSpace(customerList[order].PhoneNumber, 23);
+                OneSpace(customerList[order].Adress, 40);
+                
+                Console.WriteLine();
+            }
+            Console.WriteLine(divisionLine);
 
         }
     }

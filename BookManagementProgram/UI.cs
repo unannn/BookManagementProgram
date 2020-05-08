@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace BookManagementProgram
 {
-    class InputNumberRange
+    class InputNumberRange        //입력할떄 커서의 위치
     {
         public const int startNumber = 1;
         public const int inputLocationX = 34;
         public const int inputLocationY = 5;
     }
-    class User
+    class User      //초기화면 사용자의 입력값 정의
     {
         public const int logIn = 1;
         public const int createAccount = 2;
@@ -21,8 +21,7 @@ namespace BookManagementProgram
 
     class UI : CustomerManagement
     {
-
-        public int LogInOrCreateAccount()
+        public int LogInOrCreateAccount()  //로그인이나 아이디 생성을 위한 초기 화면 출력
         {
             string inputNumberInString = null;
             int inputNumber = -2;
@@ -33,10 +32,9 @@ namespace BookManagementProgram
                 "종료 3"
             };
 
-            while(inputNumber < 0)
+            while(inputNumber < 0) // 올바른 입력시 탈출
             {
                 PrintTitle();
-
 
                 Console.Write($"{initialMenu[0]} {initialMenu[1]} {initialMenu[2]} 입력 : ");
                 if(inputNumber == ExceptionHandling.wrongInput)Console.Write("\n다시 입력해 주세요.");
@@ -44,7 +42,7 @@ namespace BookManagementProgram
                 Console.SetCursorPosition(InputNumberRange.inputLocationX, InputNumberRange.inputLocationY);
                 inputNumberInString = Console.ReadLine();
 
-                inputNumber = ExceptionHandling.InputNumber(InputNumberRange.startNumber, initialMenu.Count, inputNumberInString);
+                inputNumber = ExceptionHandling.InputNumber(InputNumberRange.startNumber, initialMenu.Count, inputNumberInString);  //정수입력
 
                 Console.Clear();
             }
@@ -52,7 +50,7 @@ namespace BookManagementProgram
             return inputNumber;
         }
         
-        public CustomerInformation LoginCustomer(List<CustomerInformation> customerList)
+        public CustomerInformation LoginCustomer(List<CustomerInformation> customerList)  //로그인 함수
         {
             string id = null;
             string password = null;
@@ -64,7 +62,7 @@ namespace BookManagementProgram
                 PrintTitle();
 
 
-                InputIdAndPassword(ref id, ref password, inputInspection);
+                InputIdAndPassword(ref id, ref password, inputInspection);    //아이디와 비밀번호 입력
 
                 if (id == null && password == null) return null;
 
@@ -83,7 +81,7 @@ namespace BookManagementProgram
             return loginCustomer;
         }
 
-        public CustomerInformation CreateCustomerAccount(List<CustomerInformation> customerList)
+        public CustomerInformation CreateCustomerAccount(List<CustomerInformation> customerList)  //계정생성
         {
             CustomerInformation customerToBeAdded = new CustomerInformation();
             NewAccountException newAccountException = new NewAccountException();
@@ -99,13 +97,13 @@ namespace BookManagementProgram
                 
                 customerToBeAdded = InputCustomerAccountInformation(newAccountException);
 
-                if (newAccountException.previousOrStay == "stay")
+                if (newAccountException.previousOrStay == "stay")   //n 을 입력시
                 {
                     newAccountException.previousOrStay = " ";
 
                     continue;
                 }
-                else if (newAccountException.previousOrStay == "previous")
+                else if (newAccountException.previousOrStay == "previous")  //y 입력시
                 {
                     newAccountException.previousOrStay = " ";
                     Console.Clear();
@@ -121,7 +119,7 @@ namespace BookManagementProgram
                     }
                 }
 
-                if (sameIdContinue)
+                if (sameIdContinue)    //잘못된 입력 체크
                 {
                     sameIdContinue = false;
                     continue;
@@ -165,7 +163,7 @@ namespace BookManagementProgram
             return customerToBeAdded;
         }
               
-        public int PrintAdministratorUserMenu()
+        public int PrintAdministratorUserMenu()  //관리자 모드일 떄 메뉴 화면
         {           
             List<string> Menu = new List<string>(){
                "1. 도서 리스트 보기/검색/대여",
@@ -234,7 +232,7 @@ namespace BookManagementProgram
 
 
         //}
-        public void PrintAndSerchAndRentBook(List<BookInformation> bookList,CustomerInformation logInCustomer)
+        public void PrintAndSerchAndRentBook(List<BookInformation> bookList,CustomerInformation logInCustomer)  //도서 리스트 출력후 검색 또는 대여 화면
         {
             BookManagement bookManageMent = new BookManagement();
             List<BookInformation> serchingBookList = new List<BookInformation>();
@@ -342,7 +340,7 @@ namespace BookManagementProgram
             }
         }
 
-        private void RentBook(CustomerInformation logInCustomer,List<BookInformation> bookList)
+        private void RentBook(CustomerInformation logInCustomer,List<BookInformation> bookList)  //책대여 함수
         {
             int inputNumber = 0;
             string inputNumberInString = null;
@@ -379,19 +377,28 @@ namespace BookManagementProgram
 
         }
 
-        public void PrintBookReturn( CustomerInformation logInCustomer, List<BookInformation> bookList)
+        public void PrintBookReturn( CustomerInformation logInCustomer, List<BookInformation> bookList)   //대여한 도서를 반납하는함수
         {
             BookManagement bookMangement = new BookManagement();
             string inputNumberInString;
             int inputNumber;
             bool isEnd = false;
 
-
+            
             while (!isEnd)
             {
                 Console.Clear();
 
                 PrintTitle();
+
+                if (logInCustomer.RentedBook.Count == 0)
+                {
+                    Console.WriteLine("대여한 도서가 없습니다.");
+                    Console.WriteLine("Press Any Key...");
+                    Console.ReadKey();
+                    Console.Clear();
+                    return;
+                }
 
                 Console.WriteLine("대여중인 도서 목록\n");
                 bookMangement.PrintBookListForReturn(logInCustomer.RentedBook);
@@ -418,7 +425,7 @@ namespace BookManagementProgram
             }
 
         }
-        public void ModifyMyData(CustomerInformation logInCustomer)
+        public void ModifyMyData(CustomerInformation logInCustomer)   //고객의 개인정보 수정
         {
             bool isEnd = false;
             int inputNumber = 0;
@@ -461,7 +468,7 @@ namespace BookManagementProgram
             }
         }
 
-        public void ResisterBook(List<BookInformation> bookList)
+        public void ResisterBook(List<BookInformation> bookList)   //책 등록, 반복되는 코드 함수화 필요
         {
             bool isEnd = false;
             BookInformation newBook = new BookInformation();
@@ -525,7 +532,6 @@ namespace BookManagementProgram
                     continue;
                 }
                 
-
                 newBook.Name = name;
                 newBook.Author = author;
                 newBook.Publisher = publisher;
@@ -542,34 +548,101 @@ namespace BookManagementProgram
             }
         }
 
-        public void DeleteBook(List<BookInformation> bookList)
+        public void DeleteBook(List<BookInformation> bookList) //등록되어있는 책들 삭제하는 함수
         {
-            bool isEnd = false;
+            string name;
 
-            while (!isEnd)
+            Console.Clear();
+
+            PrintTitle();
+
+            Console.WriteLine();
+            Console.WriteLine("    도서 삭제\n");
+
+            Console.Write(" 삭제할 도서 이름 입력 : ");
+            name = ExceptionHandling.InputString(1, 30);
+            if(name != null)
             {
-
+                for (int book = 0; book < bookList.Count; book++)
+                {
+                    if (bookList[book].Name == name)
+                    {
+                        bookList.RemoveAt(book);
+                        Console.WriteLine();
+                        Console.WriteLine("해당 도서가 삭제됐습니다.");
+                        Console.WriteLine("Press Any Key...");
+                        Console.ReadKey();
+                        Console.Clear();
+                        return;
+                    }
+                }
             }
+            
+
+            Console.WriteLine();
+            Console.WriteLine("해당 도서가 존재하지 않습니다.");
+            Console.WriteLine("Press Any Key...");
+            Console.ReadKey();
+            Console.Clear();
         }
 
         public void ShowCustomerList(List<CustomerInformation> customerList)
         {
-            bool isEnd = false;
+            Console.SetWindowSize(130, 36);
 
-            while (!isEnd)
-            {
+            Console.Clear();
 
-            }
+            PrintTitle();
+
+            Console.WriteLine();
+            Console.WriteLine("      회원 목록\n");
+            PrintAllCustomer(customerList);
+
+            Console.WriteLine();
+            Console.WriteLine("Press Any Key...");
+            Console.ReadKey();
+            Console.Clear();
+
+            Console.SetWindowSize(90, 36);
         }
 
-        public void DeleteCustomer(List<CustomerInformation> customerList)
+        public void DeleteCustomer(List<CustomerInformation> customerList,CustomerInformation logInCustomer)
         {
-            bool isEnd = false;
+            string inputId = null;
+            PrintTitle();
 
-            while (!isEnd)
+            Console.WriteLine();
+            Console.Write("      회원 아이디 입력 : ");
+            inputId = ExceptionHandling.InputString(1,11);
+            if(inputId != null)
             {
-
+                if(logInCustomer.IsAdministrator == true)
+                {
+                    for (int customer = 0; customer < customerList.Count; customer++)
+                    {
+                        if (customerList[customer].Id == inputId)
+                        {
+                            customerList.RemoveAt(customer);
+                            Console.WriteLine();
+                            Console.WriteLine("해당 아이디가 삭제 됐습니다.");
+                            Console.WriteLine("Press Any Key...");
+                            Console.ReadKey();
+                            Console.Clear();
+                            return;
+                        }
+                    }
+                    Console.WriteLine("해당 아이디가 없습니다.");
+                }
+                else
+                {
+                    Console.WriteLine("관리자의 아이디 입니다.");                   
+                }
             }
+
+            Console.WriteLine();
+            Console.WriteLine("Press Any Key...");
+            Console.ReadKey();
+            Console.Clear();
         }
     }
 }

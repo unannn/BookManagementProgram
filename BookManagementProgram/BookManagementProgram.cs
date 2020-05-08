@@ -68,7 +68,7 @@ namespace BookManagementProgram
                 {
                     while (loginSucessful)
                     {
-                        selectedNumber = ui.PrintAdministratorUserMenu();
+                        selectedNumber = ui.PrintAdministratorUserMenu();  //관리자 모드 실행
 
                         switch (selectedNumber)
                         {
@@ -88,7 +88,7 @@ namespace BookManagementProgram
                                 ui.ShowCustomerList(customerList);
                                 break;
                             case 6:           //회원 삭제
-                                ui.DeleteCustomer(customerList);
+                                ui.DeleteCustomer(customerList,logInCustomer);
                                 break;
                             case 7:           //내정보 수정
                                 ui.ModifyMyData(logInCustomer);
@@ -111,7 +111,7 @@ namespace BookManagementProgram
                 {
                     while (loginSucessful)
                     {
-                        selectedNumber = ui.PrintUserMenu();
+                        selectedNumber = ui.PrintUserMenu();  //일반사용자모드 실행
 
                         switch (selectedNumber)
                         {
@@ -137,10 +137,7 @@ namespace BookManagementProgram
                         }
                     }
                 }
-            }
-            
-
-            
+            }           
         }
     }
 }

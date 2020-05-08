@@ -42,7 +42,7 @@ namespace BookManagementProgram
     {
         public const int wrongInput = -1;
 
-        static public int InputNumber(int  start, int end, string numberInString)   //start 와 end 사이에 문자열이 입력되면 정수로 변환 후 반환 실패시 -1 반환
+        static public int InputNumber(int start, int end, string numberInString)   //start 와 end 사이에 문자열이 입력되면 정수로 변환 후 반환 실패시 -1 반환(한자리수만 가능)
         {
             int number = wrongInput;
 
@@ -53,13 +53,13 @@ namespace BookManagementProgram
                     number = int.Parse(numberInString);
 
                     return number;
-                }                
+                }
             }
 
             return number;
         }
 
-        //static public int InputNumber(int start, int end, string numberInString)
+        //static public int InputNumber(int start, int end, string numberInString) //여러자리 가능하지만 익셉션발생 수정해야함
         //{
         //    int inputNumber = wrongInput;
         //    int number = 0;
@@ -132,7 +132,7 @@ namespace BookManagementProgram
             return null;
         }
 
-        static public string InputPhoneNumber()
+        static public string InputPhoneNumber() //전화번호 입력후 11자리 숫자가 입력되면 string으로 반환 아니면 null 반환
         {
             string phoneNumber;
             int number;
@@ -160,7 +160,7 @@ namespace BookManagementProgram
             return phoneNumber;
         }
 
-        static public string InputString(int above, int below)
+        static public string InputString(int above, int below) //above 이상 below 이하 만큼 크기의 문자열 입력 실패시 널 반환
         {
             string inputString = null;
                       

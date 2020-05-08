@@ -10,15 +10,22 @@ namespace BookManagementProgram
     {
         protected void PrintTitle()
         {
+            string bar = new string('-', 33);
             Console.WriteLine("\n");
-            Console.WriteLine("     BOOK MANAGEMENT PROGRAM\n\n");
+            Console.WriteLine("+" +bar+"+");
+            Console.WriteLine("|     BOOK MANAGEMENT PROGRAM     |");
+            Console.WriteLine("+" + bar+ "+");
+            Console.WriteLine();
+
         }
-       
+
         protected void InputIdAndPassword(ref string id, ref string password,int inputInspection)
         {
+            string whiteSpace = new string(' ', 40);
             string yesOrNo = null;
-             
-            PrintInputBox("아이디");
+            Console.WriteLine("아이디 (2~11글자)");
+
+            PrintInputBox("");
 
             PrintInputBox("비밀번호");
 
@@ -30,7 +37,6 @@ namespace BookManagementProgram
                 while (true)
                 {
                     yesOrNo = Console.ReadLine();
-                    string whiteSpace = new string(' ', 40);
                     if (yesOrNo == "y")
                     {
                         id = null;
@@ -60,6 +66,8 @@ namespace BookManagementProgram
             id = Console.ReadLine();
 
             Console.SetCursorPosition(Console.CursorLeft + 2, Console.CursorTop + 2);
+             Console.Write(whiteSpace);
+            Console.SetCursorPosition(2, Console.CursorTop);
             password = Console.ReadLine();                       
         }
               

@@ -12,7 +12,6 @@ namespace BookManagementProgram
         public void PrintBookList(List<BookInformation> bookList)
         {
             string divisionLine = new String('-', 76);
-            //string blank = null;
             
             for(int order = 0;order < bookList.Count; order++)
             {
@@ -22,7 +21,6 @@ namespace BookManagementProgram
                 OneSpace(bookList[order].Name, 30);  
                 OneSpace(bookList[order].Author, 20);
                 OneSpace(bookList[order].Publisher, 10);
-
 
                 Console.Write(" " + bookList[order].Quantity + "권");
                 Console.WriteLine();
