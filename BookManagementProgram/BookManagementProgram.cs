@@ -53,7 +53,14 @@ namespace BookManagementProgram
 
                         customerList.Add(createdAccount);
                     }
+                    else if(selectedNumber == User.endProgram)
+                    {
+                        endOfProgram = true;
+                        break;
+                    }
                 }
+
+                if (endOfProgram == true) break;
 
                 selectedNumber = ExceptionHandling.wrongInput; //seletedNumber 다시 초기화
                 
@@ -66,18 +73,22 @@ namespace BookManagementProgram
                         switch (selectedNumber)
                         {
                             case 1:           
-                                ui.PrintAndSerchAndRentBook(bookList,logInCustomer);
+                                ui.PrintAndSerchAndRentBook(bookList,logInCustomer);      //도서 출력, 검색, 대여
                                 break;
                             case 2:
-                                ui.PrintBookReturn(logInCustomer, bookList);
+                                ui.PrintBookReturn(logInCustomer, bookList);   //도서 반납
                                 break;
                             case 3:              //도서 등록
+                                ui.ResisterBook(bookList);
                                 break;
                             case 4:               //도서 삭제
+                                ui.DeleteBook(bookList);
                                 break;
                             case 5:            //회원리스트 보기
+                                ui.ShowCustomerList(customerList);
                                 break;
                             case 6:           //회원 삭제
+                                ui.DeleteCustomer(customerList);
                                 break;
                             case 7:           //내정보 수정
                                 ui.ModifyMyData(logInCustomer);
@@ -111,6 +122,7 @@ namespace BookManagementProgram
                                 ui.PrintBookReturn(logInCustomer, bookList);
                                 break;                            
                             case 3:           //내정보 수정
+                                ui.ModifyMyData(logInCustomer);
                                 break;
                             case 4:           //로그아웃
                                 loginSucessful = false;

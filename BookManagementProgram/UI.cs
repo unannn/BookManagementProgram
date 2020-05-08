@@ -9,14 +9,14 @@ namespace BookManagementProgram
     class InputNumberRange
     {
         public const int startNumber = 1;
-        public const int inputLocationX = 28;
+        public const int inputLocationX = 34;
         public const int inputLocationY = 5;
     }
     class User
     {
         public const int logIn = 1;
         public const int createAccount = 2;
-
+        public const int endProgram = 3;
     }
 
     class UI : CustomerManagement
@@ -29,7 +29,8 @@ namespace BookManagementProgram
             List<string> initialMenu = new List<string>()
             {
                 "로그인 1",
-                "회원가입 2"
+                "회원가입 2",
+                "종료 3"
             };
 
             while(inputNumber < 0)
@@ -37,7 +38,7 @@ namespace BookManagementProgram
                 PrintTitle();
 
 
-                Console.Write($"{initialMenu[0]} {initialMenu[1]} 입력 : ");
+                Console.Write($"{initialMenu[0]} {initialMenu[1]} {initialMenu[2]} 입력 : ");
                 if(inputNumber == ExceptionHandling.wrongInput)Console.Write("\n다시 입력해 주세요.");
 
                 Console.SetCursorPosition(InputNumberRange.inputLocationX, InputNumberRange.inputLocationY);
@@ -457,9 +458,118 @@ namespace BookManagementProgram
                             break;
                     }
                 }
+            }
+        }
+
+        public void ResisterBook(List<BookInformation> bookList)
+        {
+            bool isEnd = false;
+            BookInformation newBook = new BookInformation();
+            string name, author, publisher, quantityInString;
+            int quantity;
+            while (!isEnd)
+            {
+                Console.Clear();
+
+                PrintTitle();
+
+                Console.WriteLine("\n      새 도서 등록\n");
+                //책정보입력
+                Console.WriteLine();
+                Console.Write("  도서 이름 : ");
+                name = ExceptionHandling.InputString(1, 30);
+                if (name == null)
+                {
+                    Console.WriteLine("잘못된 입력 입니다.");
+                    Console.WriteLine("Press Any Key...");
+                    Console.ReadKey();
+                    Console.Clear();
+                    continue;
+                }
+
+                Console.WriteLine();
+                Console.Write("  도서 저자 : ");
+                author= ExceptionHandling.InputString(1, 20);
+
+                if (author == null)
+                {
+                    Console.WriteLine("잘못된 입력 입니다.");
+                    Console.WriteLine("Press Any Key...");
+                    Console.ReadKey();
+                    Console.Clear();
+                    continue;
+                }
+
+                Console.WriteLine();
+                Console.Write("도서 출판사 : ");
+                publisher = ExceptionHandling.InputString(1, 10);
+                if (publisher == null)
+                {
+                    Console.WriteLine("잘못된 입력 입니다.");
+                    Console.WriteLine("Press Any Key...");
+                    Console.ReadKey();
+                    Console.Clear();
+                    continue;
+                }
+
+                Console.WriteLine();
+                Console.Write("      권수 : ");
+                quantityInString = Console.ReadLine();
+                quantity = ExceptionHandling.InputNumber(1, 10,quantityInString);
+                if (quantity == ExceptionHandling.wrongInput)
+                {
+                    Console.WriteLine("잘못된 입력 입니다.");
+                    Console.WriteLine("Press Any Key...");
+                    Console.ReadKey();
+                    Console.Clear();
+                    continue;
+                }
+                
+
+                newBook.Name = name;
+                newBook.Author = author;
+                newBook.Publisher = publisher;
+                newBook.Quantity = quantity;
+
+                bookList.Add(newBook);
+                Console.WriteLine();
+
+                Console.WriteLine("도서가 등록 됐습니다.");
+                Console.WriteLine("Press Any Key...");
+                Console.ReadKey();
+                Console.Clear();
+                isEnd = true;
+            }
+        }
+
+        public void DeleteBook(List<BookInformation> bookList)
+        {
+            bool isEnd = false;
+
+            while (!isEnd)
+            {
 
             }
+        }
 
+        public void ShowCustomerList(List<CustomerInformation> customerList)
+        {
+            bool isEnd = false;
+
+            while (!isEnd)
+            {
+
+            }
+        }
+
+        public void DeleteCustomer(List<CustomerInformation> customerList)
+        {
+            bool isEnd = false;
+
+            while (!isEnd)
+            {
+
+            }
         }
     }
 }
