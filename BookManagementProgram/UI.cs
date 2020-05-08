@@ -88,6 +88,7 @@ namespace BookManagementProgram
             NewAccountException newAccountException = new NewAccountException();
 
             bool loginSucessful = false;
+            bool sameIdContinue = false;
 
             while (!loginSucessful)
             {
@@ -115,8 +116,14 @@ namespace BookManagementProgram
                     if (string.Compare(customerToBeAdded.Id, customer.Id) == 0)  //같은 아이디 존재
                     {
                         newAccountException.sameId = true;
-                        continue;
+                        sameIdContinue = true;
                     }
+                }
+
+                if (sameIdContinue)
+                {
+                    sameIdContinue = false;
+                    continue;
                 }
 
                 if (customerToBeAdded.Id == null)
@@ -404,8 +411,53 @@ namespace BookManagementProgram
                     Console.WriteLine("반납이 완료 됐습니다.");
                     Console.WriteLine("Press Any Key...");
                     Console.ReadKey();
+                    Console.Clear();
                     isEnd = true;
                 }               
+            }
+
+        }
+        public void ModifyMyData(CustomerInformation logInCustomer)
+        {
+            bool isEnd = false;
+            int inputNumber = 0;
+            string inputNumberInString = null;
+
+            while (!isEnd)
+            {
+                Console.Clear();
+
+                PrintTitle();
+                
+                Console.WriteLine("          내 정보\n");
+                Console.Write("\n      이름 : " + logInCustomer.Name);
+                Console.WriteLine("  휴대폰번호 : " + logInCustomer.PhoneNumber);
+                Console.WriteLine("\n      주소 : " + logInCustomer.Adress);
+
+                Console.Write("\n\n\n     휴대폰번호 수정 1, 주소 수정 2, 종료 3 입력 : ");
+
+                inputNumberInString = Console.ReadLine();
+                inputNumber = ExceptionHandling.InputNumber(1,3,inputNumberInString);
+
+                if(inputNumber != ExceptionHandling.wrongInput)
+                {
+                    switch (inputNumber)
+                    {
+                        case 1:
+                            ModifyPhoneNumber(logInCustomer);
+                            break;
+                        case 2:
+                            ModifyAdress(logInCustomer);
+                            break;
+                        case 3:
+                            Console.Clear();
+                            isEnd = true;
+                            break;
+                        default:
+                            break;
+                    }
+                }
+
             }
 
         }

@@ -31,6 +31,7 @@ namespace BookManagementProgram
             bool loginSucessful = false;
             bool endOfProgram = false;
             
+            
             while (!endOfProgram)
             {
                 while (!loginSucessful)            //로그인 성공 시 까지 반복
@@ -58,29 +59,35 @@ namespace BookManagementProgram
                 
                 if(logInCustomer.IsAdministrator == true)
                 {
-                    while (true)
+                    while (loginSucessful)
                     {
                         selectedNumber = ui.PrintAdministratorUserMenu();
 
                         switch (selectedNumber)
                         {
-                            case 1:
+                            case 1:           
                                 ui.PrintAndSerchAndRentBook(bookList,logInCustomer);
                                 break;
                             case 2:
                                 ui.PrintBookReturn(logInCustomer, bookList);
                                 break;
-                            case 3:
+                            case 3:              //도서 등록
                                 break;
-                            case 4:
+                            case 4:               //도서 삭제
                                 break;
-                            case 5:
+                            case 5:            //회원리스트 보기
                                 break;
-                            case 6:
+                            case 6:           //회원 삭제
                                 break;
-                            case 7:
+                            case 7:           //내정보 수정
+                                ui.ModifyMyData(logInCustomer);
                                 break;
-                            case 8:
+                            case 8:           //로그아웃
+                                loginSucessful = false;
+                                break;
+                            case 9:           //프로그램 종료
+                                loginSucessful = false;
+                                endOfProgram = true;
                                 break;
                             default:
                                 break;
@@ -91,9 +98,31 @@ namespace BookManagementProgram
                 }
                 else
                 {
-                    while (true)
+                    while (loginSucessful)
                     {
                         selectedNumber = ui.PrintUserMenu();
+
+                        switch (selectedNumber)
+                        {
+                            case 1:
+                                ui.PrintAndSerchAndRentBook(bookList, logInCustomer);
+                                break;
+                            case 2:
+                                ui.PrintBookReturn(logInCustomer, bookList);
+                                break;                            
+                            case 3:           //내정보 수정
+                                break;
+                            case 4:           //로그아웃
+                                loginSucessful = false;
+                                break;
+                            case 5:           //프로그램 종료
+                                loginSucessful = false;
+                                endOfProgram = true;
+                                break;
+                            default:
+                                break;
+
+                        }
                     }
                 }
             }

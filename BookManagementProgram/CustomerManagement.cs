@@ -124,19 +124,58 @@ namespace BookManagementProgram
 
             return newCustomer;
         }
-        public string ModifyAdress(string adress)
+        protected void ModifyAdress(CustomerInformation logInCustomer)
         {
-            string ModifiedAdress = null;
+            string modifiedAdress = null;
 
+            Console.WriteLine();
+            Console.WriteLine("현재 주소 : " + logInCustomer.Adress);
+            Console.WriteLine();
+            Console.Write("바꿀 주소 : ");
 
-            return ModifiedAdress;
+            modifiedAdress = ExceptionHandling.InputString(1, 20);
+            if(modifiedAdress != null)
+            {
+                logInCustomer.Adress = modifiedAdress;
+                Console.WriteLine("주소가 변경되었습니다.");
+                Console.WriteLine("Press Any Key...");
+                Console.ReadKey();
+
+            }
+            else
+            {
+                Console.WriteLine("잘못된 입력입니다.");
+                Console.WriteLine("Press Any Key...");
+                Console.ReadKey();
+
+            }
         }
 
-        public string ModifyPhoneNumber(string phoneNumber)
+        protected void ModifyPhoneNumber(CustomerInformation logInCustomer)
         {
-            string ModifiedPhoneNumber = null;
+            string modifiedPhoneNumber = null;
 
-            return ModifiedPhoneNumber;
+            Console.WriteLine();
+            Console.WriteLine("현재 번호 : " + logInCustomer.PhoneNumber);
+            Console.WriteLine();
+            Console.Write("바꿀 번호 : ");
+
+            modifiedPhoneNumber = ExceptionHandling.InputPhoneNumber();
+            if (modifiedPhoneNumber != null)
+            {
+                logInCustomer.PhoneNumber = modifiedPhoneNumber;
+                Console.WriteLine("번호가 변경되었습니다.");
+                Console.WriteLine("Press Any Key...");
+                Console.ReadKey();
+
+            }
+            else
+            {
+                Console.WriteLine("잘못된 입력입니다.");
+                Console.WriteLine("Press Any Key...");
+                Console.ReadKey();
+            }
+
         }
 
         public List<CustomerInformation> DeleteCustomerData(List<CustomerInformation> custmerList)
