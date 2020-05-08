@@ -52,6 +52,12 @@ namespace BookManagementProgram
             set { isAdministrator = value; }
         }
 
+        public List<BookInformation> RentedBook
+        {
+            get { return rentedBook; }
+            set { rentedBook = value; }
+        }
+
         public CustomerInformation()
         {
             this.id = null;

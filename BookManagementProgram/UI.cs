@@ -229,19 +229,20 @@ namespace BookManagementProgram
         public void PrintAndSerchAndRentBook(List<BookInformation> bookList,CustomerInformation logInCustomer)
         {
             BookManagement bookManageMent = new BookManagement();
+            List<BookInformation> serchingBookList = new List<BookInformation>();
             List<string> controlMenu = new List<string>(){
-               "1. 도서이름 검색",
-               "2. 도서저자 검색",
+               "1. 도서 이름 검색",
+               "2. 도서 저자 검색",
                "3. 도서 출판사 검색",
                "4. 도서 대여",
                "5. 나가기"
             };
             int inputNumber = 0;  //inputNumber 초기화
             string inputNumberInString = null;
+            bool isEnd = false;
 
-            while (true)
+            while (!isEnd)
             {
-
                 PrintTitle();
 
                 bookManageMent.PrintBookList(bookList);
@@ -264,15 +265,66 @@ namespace BookManagementProgram
                     Console.Clear();
                     continue;
                 }
+                
 
                 switch (inputNumber)
                 {
-                    case 1:
+                    case 1:       //이름으로 검색
+                        serchingBookList = bookManageMent.SerchByName(bookList);
+                        Console.Clear();
+                        PrintTitle();
+                        if (serchingBookList.Count > 0)
+                        {
+                            bookManageMent.PrintBookList(serchingBookList);
+                            RentBook(logInCustomer, serchingBookList);
+                        }
+                        else
+                        {
+                            Console.WriteLine("해당 도서가 존재하지 않습니다");
+                            Console.WriteLine("Press Any Key...");
+                            
+                            Console.ReadKey();
+                        }
+                        break;
+                    case 2:        //저자로 검색
+                        serchingBookList = bookManageMent.SerchByAuthor(bookList);
+                        Console.Clear();
+                        PrintTitle();
+                        if (serchingBookList.Count > 0)
+                        {
+                            bookManageMent.PrintBookList(serchingBookList);
+                            RentBook(logInCustomer, serchingBookList);
+                        }
+                        else
+                        {
+                            Console.WriteLine("해당 도서가 존재하지 않습니다");
+                            Console.WriteLine("Press Any Key...");
 
+                            Console.ReadKey();
+                        }
                         break;
-                    case 2:
+                    case 3:  //출판사로 검색
+                        serchingBookList = bookManageMent.SerchedByPublisher(bookList);
+                        Console.Clear();
+                        PrintTitle();
+                        if (serchingBookList.Count > 0)
+                        {
+                            bookManageMent.PrintBookList(serchingBookList);
+                            RentBook(logInCustomer, serchingBookList);
+                        }
+                        else
+                        {
+                            Console.WriteLine("해당 도서가 존재하지 않습니다");
+                            Console.WriteLine("Press Any Key...");
+
+                            Console.ReadKey();
+                        }
                         break;
-                    case 3:
+                    case 4:    //도서대여
+                        RentBook(logInCustomer, bookList);
+                        break;
+                    case 5:
+                        isEnd = true;
                         break;
                     default:
                         break;
@@ -283,5 +335,30 @@ namespace BookManagementProgram
 
         }
 
+        private void RentBook(CustomerInformation logInCustomer,List<BookInformation> bookList)
+        {
+            int inputNumber = 0;
+            string inputNumberInString = null;
+
+            Console.Write("대여할 책 번호 입력 : ");
+            inputNumberInString = Console.ReadLine();
+            inputNumber = ExceptionHandling.InputNumber(1, bookList.Count, inputNumberInString);
+
+            if(inputNumber != ExceptionHandling.wrongInput)
+            {
+                bookList[inputNumber - 1].Quantity -= 1;
+                logInCustomer.RentedBook.Add(bookList[inputNumber - 1]);
+                Console.WriteLine("대여가 완료되었습니다.");
+                Console.WriteLine("Press Any Key...");
+                Console.ReadKey();
+            }
+            else
+            {
+                Console.WriteLine("해당 도서가 존재하지 않습니다.");
+                Console.WriteLine("Press Any Key...");
+                Console.ReadKey();
+            }
+
+        }
     }
 }

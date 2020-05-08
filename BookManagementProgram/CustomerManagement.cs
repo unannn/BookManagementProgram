@@ -76,14 +76,14 @@ namespace BookManagementProgram
             if(exceptionNumber == 1)
             {
                 Console.Write("초기화면으로 돌아가시겠습니까?[y,n] ");
-                yesOrNo = ExceptionHandling.inputString(1, 1);
+                yesOrNo = ExceptionHandling.InputString(1, 1);
                 if(yesOrNo != null)
                 {
                     if (yesOrNo == "y") newAccountException.previousOrStay = "previous";
-                    else if(yesOrNo == "n")newAccountException.previousOrStay = "stay";
-
-                    return newCustomer;
+                    else if(yesOrNo == "n")newAccountException.previousOrStay = "stay";                   
                 }
+
+                return newCustomer;
             }
 
 
@@ -104,7 +104,7 @@ namespace BookManagementProgram
             Console.SetCursorPosition(Console.CursorLeft + 2, Console.CursorTop + 2);
             Console.Write(whiteSpace);
             Console.SetCursorPosition(2, Console.CursorTop);
-            name = ExceptionHandling.inputString(2, 20);
+            name = ExceptionHandling.InputString(2, 20);
 
             Console.SetCursorPosition(Console.CursorLeft + 2, Console.CursorTop + 2);
             Console.Write(whiteSpace);
@@ -114,7 +114,7 @@ namespace BookManagementProgram
             Console.SetCursorPosition(Console.CursorLeft + 2, Console.CursorTop + 2);
             Console.Write(whiteSpace);
             Console.SetCursorPosition(2, Console.CursorTop);
-            adress = ExceptionHandling.inputString(1, 30);
+            adress = ExceptionHandling.InputString(1, 30);
 
             newCustomer.Id = id;
             newCustomer.Password = password;

@@ -86,8 +86,8 @@ namespace BookManagementProgram
 
         protected void OneSpace(string bookeInformation,int limit)
         {
-            Console.Write(bookeInformation);
-            Console.Write(new String(' ', limit - bookeInformation.Length * 2));
+            Console.Write(" " + bookeInformation);
+            Console.Write(new String(' ', limit - Encoding.Default.GetByteCount(bookeInformation)));
             Console.Write("|");
         }
     }
