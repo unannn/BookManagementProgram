@@ -17,7 +17,6 @@ namespace BookManagementProgram
             string name = null;
             string phoneNumber = null;
             string adress = null;
-            string whiteSpace = new String(' ', 50);
             string yesOrNo = null;
             int exceptionNumber = 0;
 
@@ -83,32 +82,22 @@ namespace BookManagementProgram
 
             Console.SetCursorPosition(Console.CursorLeft + 2, Console.CursorTop - 17 - exceptionNumber);
 
-            id = ExceptionHandling.InputId();
+            id = ExceptionHandling.InputId();   //id 입력
 
-            Console.SetCursorPosition(Console.CursorLeft + 2, Console.CursorTop + 2);
-            Console.Write(whiteSpace);
-            Console.SetCursorPosition(2, Console.CursorTop);
-            password = ExceptionHandling.InputPassword();
+            MoveCursor();
+            password = ExceptionHandling.InputPassword();  //password 입력
 
-            Console.SetCursorPosition(Console.CursorLeft + 2, Console.CursorTop + 2);
-            Console.Write(whiteSpace);
-            Console.SetCursorPosition(2, Console.CursorTop);
-            passwordConfirmation = ExceptionHandling.InputPassword();
+            MoveCursor();
+            passwordConfirmation = ExceptionHandling.InputPassword();  //비밀번호 확인 입력
 
-            Console.SetCursorPosition(Console.CursorLeft + 2, Console.CursorTop + 2);
-            Console.Write(whiteSpace);
-            Console.SetCursorPosition(2, Console.CursorTop);
-            name = ExceptionHandling.InputString(2, 20);
+            MoveCursor();
+            name = ExceptionHandling.InputString(2, 20);              //이름 입력
 
-            Console.SetCursorPosition(Console.CursorLeft + 2, Console.CursorTop + 2);
-            Console.Write(whiteSpace);
-            Console.SetCursorPosition(2, Console.CursorTop);
-            phoneNumber = ExceptionHandling.InputPhoneNumber();
+            MoveCursor();
+            phoneNumber = ExceptionHandling.InputPhoneNumber();  //휴대번호 입력
 
-            Console.SetCursorPosition(Console.CursorLeft + 2, Console.CursorTop + 2);
-            Console.Write(whiteSpace);
-            Console.SetCursorPosition(2, Console.CursorTop);
-            adress = ExceptionHandling.InputString(1, 30);
+            MoveCursor();
+            adress = ExceptionHandling.InputString(1, 30);       //주소 입력
 
             newCustomer.Id = id;
             newCustomer.Password = password;
@@ -123,24 +112,22 @@ namespace BookManagementProgram
             string modifiedAdress = null;
 
             Console.WriteLine();
-            Console.WriteLine("현재 주소 : " + logInCustomer.Adress);
+            Console.WriteLine("          현재 주소 : " + logInCustomer.Adress);
             Console.WriteLine();
-            Console.Write("바꿀 주소 : ");
+            Console.Write("바꿀 주소(2~20글자) : ");
 
-            modifiedAdress = ExceptionHandling.InputString(1, 20);
+            modifiedAdress = ExceptionHandling.InputString(2, 20);
             if(modifiedAdress != null)
             {
                 logInCustomer.Adress = modifiedAdress;
-                Console.WriteLine("주소가 변경되었습니다.");
-                Console.WriteLine("Press Any Key...");
-                Console.ReadKey();
+               
+                PrintFailMessage("주소가 변경되었습니다.");
 
             }
             else
             {
-                Console.WriteLine("잘못된 입력입니다.");
-                Console.WriteLine("Press Any Key...");
-                Console.ReadKey();
+                PrintFailMessage("잘못된 입력입니다.");
+
 
             }
         }
@@ -158,26 +145,15 @@ namespace BookManagementProgram
             if (modifiedPhoneNumber != null)
             {
                 logInCustomer.PhoneNumber = modifiedPhoneNumber;
-                Console.WriteLine("번호가 변경되었습니다.");
-                Console.WriteLine("Press Any Key...");
-                Console.ReadKey();
-
+                PrintFailMessage("번호가 변경되었습니다.");
             }
             else
             {
-                Console.WriteLine("잘못된 입력입니다.");
-                Console.WriteLine("Press Any Key...");
-                Console.ReadKey();
+                PrintFailMessage("잘못된 입력입니다.");
             }
 
         }
-
-        public List<CustomerInformation> DeleteCustomerData(List<CustomerInformation> custmerList)
-        {
-
-            return custmerList;
-        }
-
+                
         public List<CustomerInformation> SerchCustomer(List<CustomerInformation> customer,string serchString)
         {
             List<CustomerInformation> serchedCustomers = new List<CustomerInformation>();

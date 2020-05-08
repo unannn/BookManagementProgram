@@ -39,7 +39,7 @@ namespace BookManagementProgram
                 Console.Write($"{initialMenu[0]} {initialMenu[1]} {initialMenu[2]} 입력 : ");
                 if(inputNumber == ExceptionHandling.wrongInput)Console.Write("\n다시 입력해 주세요.");
 
-                Console.SetCursorPosition(InputNumberRange.inputLocationX, InputNumberRange.inputLocationY);
+                Console.SetCursorPosition(InputNumberRange.inputLocationX, InputNumberRange.inputLocationY + 1);
                 inputNumberInString = Console.ReadLine();
 
                 inputNumber = ExceptionHandling.InputNumber(InputNumberRange.startNumber, initialMenu.Count, inputNumberInString);  //정수입력
@@ -192,8 +192,7 @@ namespace BookManagementProgram
 
                 Console.Clear();
             }
-
-           
+                      
 
             return inputNumber;
         }
@@ -303,10 +302,7 @@ namespace BookManagementProgram
                         }
                         else
                         {
-                            Console.WriteLine("해당 도서가 존재하지 않습니다");
-                            Console.WriteLine("Press Any Key...");
-
-                            Console.ReadKey();
+                            PrintFailMessage("해당 도서가 존재하지 않습니다.");
                         }
                         break;
                     case 3:  //출판사로 검색
@@ -320,10 +316,7 @@ namespace BookManagementProgram
                         }
                         else
                         {
-                            Console.WriteLine("해당 도서가 존재하지 않습니다");
-                            Console.WriteLine("Press Any Key...");
-
-                            Console.ReadKey();
+                            PrintFailMessage("해당 도서가 존재하지 않습니다");
                         }
                         break;
                     case 4:    //도서대여
@@ -355,24 +348,20 @@ namespace BookManagementProgram
                 {
                     if(rentedBook == bookList[inputNumber - 1]) //이미 대여중인 책이면
                     {
-                        Console.WriteLine("이미 대여한 도서입니다.");
-                        Console.WriteLine("Press Any Key...");
-                        Console.ReadKey();
+                        PrintFailMessage("이미 대여한 도서입니다.");
+
                         return;
                     }
                 }
 
                 bookList[inputNumber - 1].Quantity -= 1;
                 logInCustomer.RentedBook.Add(bookList[inputNumber - 1]);
-                Console.WriteLine("대여가 완료되었습니다.");
-                Console.WriteLine("Press Any Key...");
-                Console.ReadKey();
+
+                PrintFailMessage("대여가 완료되었습니다.");
             }
             else
             {
-                Console.WriteLine("해당 도서가 존재하지 않습니다.");
-                Console.WriteLine("Press Any Key...");
-                Console.ReadKey();
+                PrintFailMessage("해당 도서가 존재하지 않습니다.");
             }
 
         }
@@ -393,9 +382,8 @@ namespace BookManagementProgram
 
                 if (logInCustomer.RentedBook.Count == 0)
                 {
-                    Console.WriteLine("대여한 도서가 없습니다.");
-                    Console.WriteLine("Press Any Key...");
-                    Console.ReadKey();
+                    PrintFailMessage("해당 도서가 존재하지 않습니다.");
+
                     Console.Clear();
                     return;
                 }
@@ -416,9 +404,8 @@ namespace BookManagementProgram
 
                     logInCustomer.RentedBook.RemoveAt(inputNumber - 1);       //대여한 도서 목록에서 삭제
 
-                    Console.WriteLine("반납이 완료 됐습니다.");
-                    Console.WriteLine("Press Any Key...");
-                    Console.ReadKey();
+                    PrintFailMessage("반납이 완료 됐습니다.");
+
                     Console.Clear();
                     isEnd = true;
                 }               
@@ -487,9 +474,8 @@ namespace BookManagementProgram
                 name = ExceptionHandling.InputString(1, 30);
                 if (name == null)
                 {
-                    Console.WriteLine("잘못된 입력 입니다.");
-                    Console.WriteLine("Press Any Key...");
-                    Console.ReadKey();
+                    PrintFailMessage("잘못된 입력 입니다.");
+
                     Console.Clear();
                     continue;
                 }
@@ -500,9 +486,8 @@ namespace BookManagementProgram
 
                 if (author == null)
                 {
-                    Console.WriteLine("잘못된 입력 입니다.");
-                    Console.WriteLine("Press Any Key...");
-                    Console.ReadKey();
+                    PrintFailMessage("잘못된 입력 입니다.");
+
                     Console.Clear();
                     continue;
                 }
@@ -512,9 +497,8 @@ namespace BookManagementProgram
                 publisher = ExceptionHandling.InputString(1, 10);
                 if (publisher == null)
                 {
-                    Console.WriteLine("잘못된 입력 입니다.");
-                    Console.WriteLine("Press Any Key...");
-                    Console.ReadKey();
+                    PrintFailMessage("잘못된 입력 입니다.");
+
                     Console.Clear();
                     continue;
                 }
@@ -525,9 +509,8 @@ namespace BookManagementProgram
                 quantity = ExceptionHandling.InputNumber(1, 10,quantityInString);
                 if (quantity == ExceptionHandling.wrongInput)
                 {
-                    Console.WriteLine("잘못된 입력 입니다.");
-                    Console.WriteLine("Press Any Key...");
-                    Console.ReadKey();
+                    PrintFailMessage("잘못된 입력 입니다.");
+
                     Console.Clear();
                     continue;
                 }
@@ -540,9 +523,8 @@ namespace BookManagementProgram
                 bookList.Add(newBook);
                 Console.WriteLine();
 
-                Console.WriteLine("도서가 등록 됐습니다.");
-                Console.WriteLine("Press Any Key...");
-                Console.ReadKey();
+                PrintFailMessage("도서가 등록 됐습니다.");
+
                 Console.Clear();
                 isEnd = true;
             }
@@ -569,9 +551,9 @@ namespace BookManagementProgram
                     {
                         bookList.RemoveAt(book);
                         Console.WriteLine();
-                        Console.WriteLine("해당 도서가 삭제됐습니다.");
-                        Console.WriteLine("Press Any Key...");
-                        Console.ReadKey();
+
+                        PrintFailMessage("해당 도서가 삭제됐습니다.");
+
                         Console.Clear();
                         return;
                     }
@@ -580,9 +562,9 @@ namespace BookManagementProgram
             
 
             Console.WriteLine();
-            Console.WriteLine("해당 도서가 존재하지 않습니다.");
-            Console.WriteLine("Press Any Key...");
-            Console.ReadKey();
+
+            PrintFailMessage("해당 도서가 존재하지 않습니다.");
+
             Console.Clear();
         }
 
@@ -596,6 +578,7 @@ namespace BookManagementProgram
 
             Console.WriteLine();
             Console.WriteLine("      회원 목록\n");
+
             PrintAllCustomer(customerList);
 
             Console.WriteLine();
@@ -616,32 +599,27 @@ namespace BookManagementProgram
             inputId = ExceptionHandling.InputString(1,11);
             if(inputId != null)
             {
-                if(logInCustomer.IsAdministrator == true)
+                if(logInCustomer.IsAdministrator != true)
                 {
                     for (int customer = 0; customer < customerList.Count; customer++)
                     {
                         if (customerList[customer].Id == inputId)
                         {
                             customerList.RemoveAt(customer);
-                            Console.WriteLine();
-                            Console.WriteLine("해당 아이디가 삭제 됐습니다.");
-                            Console.WriteLine("Press Any Key...");
-                            Console.ReadKey();
+
+                            PrintFailMessage("해당 아이디가 삭제 됐습니다.");
                             Console.Clear();
                             return;
                         }
                     }
-                    Console.WriteLine("해당 아이디가 없습니다.");
+                    PrintFailMessage("해당 아이디가 없습니다.");
                 }
                 else
                 {
-                    Console.WriteLine("관리자의 아이디 입니다.");                   
+                    PrintFailMessage("관리자의 아이디 입니다.");               
                 }
             }
-
-            Console.WriteLine();
-            Console.WriteLine("Press Any Key...");
-            Console.ReadKey();
+            
             Console.Clear();
         }
     }

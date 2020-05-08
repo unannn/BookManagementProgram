@@ -42,42 +42,44 @@ namespace BookManagementProgram
     {
         public const int wrongInput = -1;
 
-        static public int InputNumber(int start, int end, string numberInString)   //start 와 end 사이에 문자열이 입력되면 정수로 변환 후 반환 실패시 -1 반환(한자리수만 가능)
-        {
-            int number = wrongInput;
-
-            if (!string.IsNullOrEmpty(numberInString) && numberInString.Length == 1)
-            {
-                if (string.Compare(numberInString, start.ToString()) >= 0 && string.Compare(numberInString, end.ToString()) <= 0)
-                {
-                    number = int.Parse(numberInString);
-
-                    return number;
-                }
-            }
-
-            return number;
-        }
-
-        //static public int InputNumber(int start, int end, string numberInString) //여러자리 가능하지만 익셉션발생 수정해야함
+        //static public int InputNumber(int start, int end, string numberInString)   //start 와 end 사이에 문자열이 입력되면 정수로 변환 후 반환 실패시 -1 반환(한자리수만 가능)
         //{
-        //    int inputNumber = wrongInput;
-        //    int number = 0;
-        //    if (!string.IsNullOrEmpty(numberInString))
+        //    int number = wrongInput;
+
+        //    if (!string.IsNullOrEmpty(numberInString) && numberInString.Length == 1)
         //    {
-        //        for (number = 0; number < numberInString.Length; number++)
+        //        if (string.Compare(numberInString, start.ToString()) >= 0 && string.Compare(numberInString, end.ToString()) <= 0)
         //        {
-        //            if (numberInString[number] < '0' || numberInString[number] > '9') break;
+        //            number = int.Parse(numberInString);
+
+        //            return number;
         //        }
         //    }
 
-        //    if (number == numberInString.Length)
-        //    {
-        //        inputNumber = int.Parse(numberInString);
-        //    }
-
-        //    return inputNumber;
+        //    return number;
         //}
+
+        static public int InputNumber(int start, int end, string numberInString) //여러자리 가능하지만 익셉션발생 수정해야함
+        {
+            int inputNumber = wrongInput;
+            int number = 0;
+
+            if (!string.IsNullOrEmpty(numberInString))
+            {
+                for (number = 0; number < numberInString.Length; number++)
+                {
+                    if (numberInString[number] < '0' || numberInString[number] > '9') break;
+                }
+                if (number == numberInString.Length && number != 0)
+                {
+                    inputNumber = int.Parse(numberInString);
+                }
+            }
+
+            
+
+            return inputNumber;
+        }
 
         static public string InputYesOrNo(string yesOrNo)   //문자열이 y 인지 n인지 아님 다른값이 들어왔는지 판단 후 반환
         {
