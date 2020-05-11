@@ -114,7 +114,7 @@ namespace BookManagementProgram
         {
             string whiteSpace = new String(' ', 50);
 
-            Console.SetCursorPosition(Console.CursorLeft + 1, Console.CursorTop + 2);
+            Console.SetCursorPosition(Console.CursorLeft + 1, Console.CursorTop + 3);
             Console.Write(whiteSpace);
             Console.SetCursorPosition(2, Console.CursorTop);
         }

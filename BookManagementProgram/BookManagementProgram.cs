@@ -50,6 +50,8 @@ namespace BookManagementProgram
                     }
                     else if (selectedNumber == User.createAccount)
                     {
+                        Console.SetWindowSize(50, 40);
+
                         createdAccount = ui.CreateCustomerAccount(customerList);
 
                         if (createdAccount == null) continue;  //뒤로가기
@@ -79,7 +81,7 @@ namespace BookManagementProgram
                         {
                             case 1:       
                                 Console.SetWindowSize(90,36);
-                                ui.PrintAndSerchAndRentBook(bookList,logInCustomer);      //도서 출력, 검색, 대여
+                                ui.PrintAndSerchAndRentBook(bookList,logInCustomer);      //도서 출력, 검색, 대여                               
                                 break;
                             case 2:
                                 Console.SetWindowSize(90, 36);
@@ -98,9 +100,10 @@ namespace BookManagementProgram
                                 break;
                             case 6:           //회원 삭제
                                 Console.SetWindowSize(130, 36);
-                                ui.DeleteCustomer(customerList,logInCustomer);
+                                ui.DeleteCustomer(customerList);
                                 break;
                             case 7:           //내정보 수정
+                                Console.SetWindowSize(90, 36);
                                 ui.ModifyMyData(logInCustomer);
                                 break;
                             case 8:           //로그아웃
@@ -137,6 +140,7 @@ namespace BookManagementProgram
                                 ui.PrintBookReturn(logInCustomer, bookList);
                                 break;                            
                             case 3:           //내정보 수정
+                                Console.SetWindowSize(90, 36);
                                 ui.ModifyMyData(logInCustomer);
                                 break;
                             case 4:           //로그아웃

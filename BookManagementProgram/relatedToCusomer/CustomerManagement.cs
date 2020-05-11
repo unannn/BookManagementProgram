@@ -19,10 +19,10 @@ namespace BookManagementProgram
             string yesOrNo = null;
             int exceptionNumber = 0;
 
-            Console.WriteLine("아이디 (2~11글자)");
+            Console.WriteLine("아이디 (특수문자 없이 2~11글자)");
             PrintInputBox("");
 
-            Console.WriteLine("비밀번호(영어와 숫자로 2~11글자)");
+            Console.WriteLine("비밀번호(특수문자 없이 2~11글자)");
             PrintInputBox("");
 
 
@@ -89,10 +89,9 @@ namespace BookManagementProgram
             }
 
 
-            Console.SetCursorPosition(Console.CursorLeft + 2, Console.CursorTop - 17 - exceptionNumber);
+            Console.SetCursorPosition(Console.CursorLeft + 2, Console.CursorTop - 22 - exceptionNumber);
 
             id = ExceptionHandling.InputId();   //id 입력
-
 
             MoveCursor();
             password = ExceptionHandling.InputPassword();  //password 입력
@@ -197,6 +196,26 @@ namespace BookManagementProgram
             }
             Console.WriteLine(divisionLine);
 
+        }
+
+        public void CheckId(int customer, List<CustomerInformation> customerList)
+        {
+            if (customerList[customer].IsAdministrator == false)
+            {
+                if (customerList[customer].RentedBook.Count == 0)   //왜 대여 했을때도 Count 가 0인지 모르겠음
+                {
+                    customerList.RemoveAt(customer);
+                    PrintFailMessage("해당 아이디가 삭제 됐습니다.");
+                }
+                else
+                {
+                    PrintFailMessage("반납하지 않은 도서가 있는 아이디입니다.");
+                }
+            }
+            else
+            {
+                PrintFailMessage("관리자의 아이디 입니다.");
+            }
         }
     }
 }

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using System.Text.RegularExpressions;
 namespace BookManagementProgram
 {
     class NewAccountException //정규식 추가하면 좋을듯
@@ -85,12 +85,15 @@ namespace BookManagementProgram
         static public string InputId()   //id입력 예외처리
         {
             string id = null;
-
+            bool isSpecial = false;
+                        
             id = Console.ReadLine();
+            isSpecial = Regex.IsMatch(id, @"[^a-zA-Z0-9가-힣]");     //정규식
+            
 
             if (!string.IsNullOrEmpty(id) && id.Length >= 2 && id.Length <= 11)       //두 글자 이상 열한글자 이하이고
             {
-                if(!id.Contains(" "))            //띄어쓰기가 없어야 함
+                if(!id.Contains(" ") && !isSpecial)            //띄어쓰기가 없어야 함
                 {
                     return id;
                 }
@@ -101,10 +104,10 @@ namespace BookManagementProgram
 
         static public string InputPassword()   //패스워드는 별로 표시
         {           
-            ConsoleKeyInfo ckey;
-            
+            ConsoleKeyInfo ckey;            
             int number = 0;
             string inputPassword = "";
+            bool isSpecial = false;
 
             while (true)
             {
@@ -132,7 +135,7 @@ namespace BookManagementProgram
                     inputPassword = inputPassword.Remove(number - 1, 1);
                     --number;
                 }                
-                else if(Char.IsLetterOrDigit(ckey.KeyChar))                   
+                else if(Char.IsLetterOrDigit(ckey.KeyChar))  //특수문자입력 X                  
                 {
                     Console.SetCursorPosition(Console.CursorLeft - 1, Console.CursorTop);
                     Console.Write("*");
@@ -162,7 +165,7 @@ namespace BookManagementProgram
 
                 for (number = 0; number < 11; number++)
                 {
-                    if (phoneNumber[number] < '0' || phoneNumber[number] > '9')
+                    if (phoneNumber[number] < '0' || phoneNumber[number] > '9')      //숫자만 11자 입력
                     {
                         break;
                     }

@@ -48,8 +48,7 @@ namespace BookManagementProgram
 
             Console.WriteLine(divisionLine);
         }
-
-       
+               
         public List<BookInformation> SerchByName(List<BookInformation> bookList)
         {
             List<BookInformation> serchedBooks = new List<BookInformation>();

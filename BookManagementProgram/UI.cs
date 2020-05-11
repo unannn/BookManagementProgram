@@ -97,8 +97,10 @@ namespace BookManagementProgram
                 Console.Clear();
 
                 PrintTitle(7);
-                
+
                 customerToBeAdded = customerManagement.InputCustomerAccountInformation(newAccountException);
+
+                if (customerToBeAdded == null) continue;
 
                 if (newAccountException.previousOrStay == "stay")   //n 을 입력시
                 {
@@ -356,7 +358,7 @@ namespace BookManagementProgram
                 }
 
                 bookList[inputNumber - 1].Quantity -= 1;
-                logInCustomer.RentedBook.Add(bookList[inputNumber - 1]);
+                logInCustomer.RentedBook.Add(bookList[inputNumber - 1]);               
 
                 PrintFailMessage("대여가 완료되었습니다.");
             }
@@ -456,7 +458,7 @@ namespace BookManagementProgram
             {
                 Console.Clear();
 
-                PrintTitle(7);
+                PrintTitle(27);
                 
                 Console.WriteLine("          내 정보\n");
                 Console.Write("\n    이름 : " + logInCustomer.Name);
@@ -589,10 +591,11 @@ namespace BookManagementProgram
 
             while (true)
             {
-                Console.Write("정말로 반납 하시겠습니까?[y,n]");
+                Console.Write("정말로 삭제 하시겠습니까?[y,n]");
                 confirmationMessage = ExceptionHandling.InputString(1, 1);
 
                 if (confirmationMessage != "y" && confirmationMessage != "n") continue;
+
 
                 break;
             }
@@ -646,7 +649,7 @@ namespace BookManagementProgram
             Console.SetWindowSize(90, 36);
         }
 
-        public void DeleteCustomer(List<CustomerInformation> customerList,CustomerInformation logInCustomer)
+        public void DeleteCustomer(List<CustomerInformation> customerList)  //계정삭제
         {
             CustomerManagement customerManagement = new CustomerManagement();
             string inputId = null;
@@ -659,23 +662,14 @@ namespace BookManagementProgram
 
             Console.Write("      회원 아이디 입력 : ");
             inputId = ExceptionHandling.InputString(1, 11);
+           
             if (inputId != null)
             {
-
                 for (int customer = 0; customer < customerList.Count; customer++)
                 {
                     if (customerList[customer].Id == inputId )
-                    {
-                        if(customerList[customer].IsAdministrator  == false)
-                        {
-                            customerList.RemoveAt(customer);
-
-                            PrintFailMessage("해당 아이디가 삭제 됐습니다.");
-                        }
-                        else
-                        {
-                            PrintFailMessage("관리자의 아이디 입니다.");
-                        }
+                    {                      
+                        customerManagement.CheckId(customer, customerList);
 
                         Console.Clear();
                         return;
