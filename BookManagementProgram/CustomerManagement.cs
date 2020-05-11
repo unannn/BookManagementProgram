@@ -7,9 +7,8 @@ using System.Threading.Tasks;
 namespace BookManagementProgram
 {
     class CustomerManagement : UITooI
-    {       
-
-        protected CustomerInformation InputCustomerAccountInformation(NewAccountException newAccountException)   //등록하고자하는 계정정보 반환
+    {   
+        public CustomerInformation InputCustomerAccountInformation(NewAccountException newAccountException)   //등록하고자하는 계정정보 반환
         {
             CustomerInformation newCustomer = new CustomerInformation();
             string id = null;
@@ -21,15 +20,25 @@ namespace BookManagementProgram
             int exceptionNumber = 0;
 
             Console.WriteLine("아이디 (2~11글자)");
-
             PrintInputBox("");
-            PrintInputBox("비밀번호(2~11글자)");
-            PrintInputBox("비밀번호확인 (2~11글자)");
-            PrintInputBox("이름 1~20글자 (2~11글자)");
-            PrintInputBox("휴대폰번호('-'없이 11글자)");
-            PrintInputBox("주소 1~20글자");
 
-            if(newAccountException.sameId == true)
+            Console.WriteLine("비밀번호(영어와 숫자로 2~11글자)");
+            PrintInputBox("");
+
+
+            Console.WriteLine("비밀번호확인 (2~11글자)");
+            PrintInputBox("");
+
+            Console.WriteLine("이름 1~20글자 (2~11글자)");
+            PrintInputBox("");
+
+            Console.WriteLine("휴대폰번호('-'없이 11글자)");
+            PrintInputBox("");
+
+            Console.WriteLine("주소 1~20글자");
+            PrintInputBox("");
+
+            if (newAccountException.sameId == true)
             {
                 Console.WriteLine("아이디가 이미 존재 합니다.");
                 newAccountException.initialize(false);
@@ -84,6 +93,7 @@ namespace BookManagementProgram
 
             id = ExceptionHandling.InputId();   //id 입력
 
+
             MoveCursor();
             password = ExceptionHandling.InputPassword();  //password 입력
 
@@ -107,7 +117,7 @@ namespace BookManagementProgram
 
             return newCustomer;
         }
-        protected void ModifyAdress(CustomerInformation logInCustomer)
+        public void ModifyAdress(CustomerInformation logInCustomer)
         {
             string modifiedAdress = null;
 
@@ -132,7 +142,7 @@ namespace BookManagementProgram
             }
         }
 
-        protected void ModifyPhoneNumber(CustomerInformation logInCustomer)
+        public void ModifyPhoneNumber(CustomerInformation logInCustomer)
         {
             string modifiedPhoneNumber = null;
 
@@ -153,7 +163,7 @@ namespace BookManagementProgram
             }
 
         }
-                
+
         public List<CustomerInformation> SerchCustomer(List<CustomerInformation> customer,string serchString)
         {
             List<CustomerInformation> serchedCustomers = new List<CustomerInformation>();

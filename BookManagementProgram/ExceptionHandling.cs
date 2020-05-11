@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BookManagementProgram
 {
-    class NewAccountException
+    class NewAccountException //정규식 추가하면 좋을듯
     {
         public bool sameId;
         public bool wrongId;
@@ -41,24 +41,7 @@ namespace BookManagementProgram
     static class ExceptionHandling
     {
         public const int wrongInput = -1;
-
-        //static public int InputNumber(int start, int end, string numberInString)   //start 와 end 사이에 문자열이 입력되면 정수로 변환 후 반환 실패시 -1 반환(한자리수만 가능)
-        //{
-        //    int number = wrongInput;
-
-        //    if (!string.IsNullOrEmpty(numberInString) && numberInString.Length == 1)
-        //    {
-        //        if (string.Compare(numberInString, start.ToString()) >= 0 && string.Compare(numberInString, end.ToString()) <= 0)
-        //        {
-        //            number = int.Parse(numberInString);
-
-        //            return number;
-        //        }
-        //    }
-
-        //    return number;
-        //}
-
+               
         static public int InputNumber(int start, int end, string numberInString) //여러자리 가능하지만 익셉션발생 수정해야함
         {
             int inputNumber = wrongInput;
@@ -76,14 +59,13 @@ namespace BookManagementProgram
                 }
             }
 
-            
-
+            if (inputNumber < start || inputNumber > end) inputNumber = wrongInput;
+                        
             return inputNumber;
         }
 
         static public string InputYesOrNo(string yesOrNo)   //문자열이 y 인지 n인지 아님 다른값이 들어왔는지 판단 후 반환
         {
-
             if (!string.IsNullOrEmpty(yesOrNo) && yesOrNo.Length == 1)
             {
                 if (string.Compare(yesOrNo, "y") == 0)
@@ -117,21 +99,55 @@ namespace BookManagementProgram
             return null;
         }
 
-        static public string InputPassword()   //id입력 예외처리
-        {
-            string password = null;
+        static public string InputPassword()   //패스워드는 별로 표시
+        {           
+            ConsoleKeyInfo ckey;
+            
+            int number = 0;
+            string inputPassword = "";
 
-            password = Console.ReadLine();
-
-            if (!string.IsNullOrEmpty(password) && password.Length >= 2 && password.Length <= 11)       //두 글자 이상이고
+            while (true)
             {
-                if (!password.Contains(" "))            //띄어쓰기가 없어야 함
+                ckey = Console.ReadKey();
+
+                if (ckey.Key == ConsoleKey.Enter)
                 {
-                    return password;
+                    Console.WriteLine();
+
+                    if (inputPassword.Length <= 11) return inputPassword;
+                    else return null;
+                }
+                else if (Console.CursorLeft < 2)
+                {
+                    inputPassword = "";
+                    Console.Write(" ");
+                }
+                else if(ckey.Key == ConsoleKey.Backspace)
+                {                    
+                    Console.SetCursorPosition(Console.CursorLeft - 1, Console.CursorTop);
+                    Console.Write("  ");
+                    Console.SetCursorPosition(Console.CursorLeft - 2, Console.CursorTop);
+                    if (Console.CursorLeft != 1) Console.Write("*");
+                    else Console.Write(" ");
+                    inputPassword = inputPassword.Remove(number - 1, 1);
+                    --number;
+                }                
+                else if(Char.IsLetterOrDigit(ckey.KeyChar))                   
+                {
+                    Console.SetCursorPosition(Console.CursorLeft - 1, Console.CursorTop);
+                    Console.Write("*");
+
+                    inputPassword += ckey.KeyChar;
+                    ++number;
+                }
+                else
+                {
+                    Console.SetCursorPosition(Console.CursorLeft - 1, Console.CursorTop);
+                    Console.Write(" ");
+                    Console.SetCursorPosition(Console.CursorLeft - 1, Console.CursorTop);
+
                 }
             }
-
-            return null;
         }
 
         static public string InputPhoneNumber() //전화번호 입력후 11자리 숫자가 입력되면 string으로 반환 아니면 null 반환

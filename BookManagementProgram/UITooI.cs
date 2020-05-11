@@ -8,15 +8,19 @@ namespace BookManagementProgram
 {  
     class UITooI
     {
-        protected void PrintTitle() //제목 출력
+        protected void PrintTitle(int spaceNumber) //제목 출력
         {
             string bar = new string('-', 33);
+            string whiteSpace = new string(' ', spaceNumber);
+
             Console.WriteLine("\n");
+            Console.Write(whiteSpace);
             Console.WriteLine("+" +bar+"+");
+            Console.Write(whiteSpace);
             Console.WriteLine("|     BOOK MANAGEMENT PROGRAM     |");
+            Console.Write(whiteSpace);
             Console.WriteLine("+" + bar+ "+");
             Console.WriteLine();
-
         }
 
         protected void InputIdAndPassword(ref string id, ref string password,int inputInspection)//아이디와 비밀번호를 입력받음
@@ -68,12 +72,12 @@ namespace BookManagementProgram
             Console.SetCursorPosition(Console.CursorLeft + 2, Console.CursorTop + 2);
              Console.Write(whiteSpace);
             Console.SetCursorPosition(2, Console.CursorTop);
-            password = Console.ReadLine();                       
+            password = ExceptionHandling.InputPassword();                       
         }
               
         protected void PrintInputBox(string inputData)        //사각박스 출력
         {
-            string loginBar = new String('-', 30);
+            string loginBar = new String('-', 35);
             string whiteSpace = new String(' ', 50 );
 
             Console.WriteLine(loginBar);
@@ -110,7 +114,7 @@ namespace BookManagementProgram
         {
             string whiteSpace = new String(' ', 50);
 
-            Console.SetCursorPosition(Console.CursorLeft + 2, Console.CursorTop + 2);
+            Console.SetCursorPosition(Console.CursorLeft + 1, Console.CursorTop + 2);
             Console.Write(whiteSpace);
             Console.SetCursorPosition(2, Console.CursorTop);
         }

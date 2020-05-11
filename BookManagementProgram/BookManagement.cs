@@ -49,11 +49,7 @@ namespace BookManagementProgram
             Console.WriteLine(divisionLine);
         }
 
-        public BookInformation ModifyBookQuantity(BookInformation book)
-        {
-            return book;
-        }
-
+       
         public List<BookInformation> SerchByName(List<BookInformation> bookList)
         {
             List<BookInformation> serchedBooks = new List<BookInformation>();
@@ -68,7 +64,7 @@ namespace BookManagementProgram
             
             for (int book = 0; book < bookList.Count; book++)
             {
-                if (bookList[book].Name.Contains(inputString))   //검색된 문자열이 책이름에 포함되는 책리스트의 책이 있으면
+                if (!string.IsNullOrEmpty(inputString) && bookList[book].Name.Contains(inputString))   //검색된 문자열이 책이름에 포함되는 책리스트의 책이 있으면
                 {
                     serchedBooks.Add((BookInformation)bookList[book]);   //복사해서 serchedBooks 리스트에 추가
                 }
@@ -91,7 +87,7 @@ namespace BookManagementProgram
 
             for (int book = 0; book < bookList.Count; book++)
             {
-                if (bookList[book].Author.Contains(inputString))   //검색된 문자열이 책이름에 포함되는 책리스트의 책이 있으면
+                if (!string.IsNullOrEmpty(inputString) && bookList[book].Author.Contains(inputString))   //검색된 문자열이 책이름에 포함되는 책리스트의 책이 있으면
                 {
                     serchedBooks.Add((BookInformation)bookList[book]);   //복사해서 serchedBooks 리스트에 추가
                 }
@@ -114,7 +110,7 @@ namespace BookManagementProgram
 
             for (int book = 0; book < bookList.Count; book++)
             {
-                if (bookList[book].Publisher.Contains(inputString))   //검색된 문자열이 책이름에 포함되는 책리스트의 책이 있으면
+                if (inputString != null && bookList[book].Publisher.Contains(inputString))   //검색된 문자열이 책이름에 포함되는 책리스트의 책이 있으면
                 {
                     serchedBooks.Add((BookInformation)bookList[book]);   //복사해서 serchedBooks 리스트에 추가
                 }

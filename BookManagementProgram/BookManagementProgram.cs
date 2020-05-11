@@ -23,7 +23,8 @@ namespace BookManagementProgram
             };
             List<CustomerInformation> customerList = new List<CustomerInformation>()
             {
-                new CustomerInformation("asdf","asdf","이윤환","01049075608","서울시 도봉구 방학3동 신동아아파트",true) //생성자 만들고 로그인 해보기
+                new CustomerInformation("asdf","asdf","이윤환","01049075608","서울시 도봉구 방학3동 신동아아파트",true), //생성자 만들고 로그인 해보기
+                new CustomerInformation("as","as","백종원","01012345608","서울시 도봉구 방학1동 신동아아파트",false)
             };
             CustomerInformation logInCustomer = null, createdAccount;
             UI ui = new UI();
@@ -36,6 +37,8 @@ namespace BookManagementProgram
             {
                 while (!loginSucessful)            //로그인 성공 시 까지 반복
                 {
+                    Console.SetWindowSize(50, 30);
+
                     selectedNumber = ui.LogInOrCreateAccount();
 
                     if (selectedNumber == User.logIn)
@@ -68,26 +71,33 @@ namespace BookManagementProgram
                 {
                     while (loginSucessful)
                     {
+                        Console.SetWindowSize(50, 30);
+
                         selectedNumber = ui.PrintAdministratorUserMenu();  //관리자 모드 실행
 
                         switch (selectedNumber)
                         {
-                            case 1:           
+                            case 1:       
+                                Console.SetWindowSize(90,36);
                                 ui.PrintAndSerchAndRentBook(bookList,logInCustomer);      //도서 출력, 검색, 대여
                                 break;
                             case 2:
+                                Console.SetWindowSize(90, 36);
                                 ui.PrintBookReturn(logInCustomer, bookList);   //도서 반납
                                 break;
                             case 3:              //도서 등록
                                 ui.ResisterBook(bookList);
                                 break;
                             case 4:               //도서 삭제
+                                Console.SetWindowSize(90, 36);
                                 ui.DeleteBook(bookList);
                                 break;
                             case 5:            //회원리스트 보기
+                                Console.SetWindowSize(130, 36);
                                 ui.ShowCustomerList(customerList);
                                 break;
                             case 6:           //회원 삭제
+                                Console.SetWindowSize(130, 36);
                                 ui.DeleteCustomer(customerList,logInCustomer);
                                 break;
                             case 7:           //내정보 수정
@@ -111,14 +121,19 @@ namespace BookManagementProgram
                 {
                     while (loginSucessful)
                     {
+                        Console.SetWindowSize(50, 30);
+
                         selectedNumber = ui.PrintUserMenu();  //일반사용자모드 실행
 
+                        
                         switch (selectedNumber)
                         {
                             case 1:
+                                Console.SetWindowSize(90, 36);
                                 ui.PrintAndSerchAndRentBook(bookList, logInCustomer);
                                 break;
                             case 2:
+                                Console.SetWindowSize(90, 36);
                                 ui.PrintBookReturn(logInCustomer, bookList);
                                 break;                            
                             case 3:           //내정보 수정
